@@ -10,13 +10,14 @@
 #define ims_DS_h
 
 #include "DSBlock.h"
-    #include "DSExpressionBlock.h"
     #include "DSParameterBlock.h"
     #include "DSIntegratorBlock.h"
     #include "DSConstantBlock.h"
 
     #include "DSOperator1Block.h"
         #include "DSUnaryMinusBlock.h"
+        #include "DSDelayBlock.h"
+        #include "DSExpressionBlock.h"
 
     #include "DSOperator2Block.h"
         #include "DSPlusBlock.h"

@@ -10,14 +10,12 @@
 #define __ims__DSExpressionBlock__
 
 #include <iostream>
-#include "DSBlock.h"
+#include "DSOperator1Block.h"
 
-class DSExpressionBlock : public DSBlock
+class DSExpressionBlock : public DSOperator1Block
 {
-    DSBlock *expression;
-    
 public:
-    DSExpressionBlock(DSBlock *exp): expression(exp){};
+    DSExpressionBlock(DSBlock *exp): DSOperator1Block(exp){};
     virtual double value();
 };
 

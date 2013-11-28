@@ -11,13 +11,13 @@
 const double F = 1.0;
 
 class Kolo {
-  //  Graph G;              // výstup polohy kola
-    //Integrator v,y;       // stav systému kola
+    Graph G;              // výstup polohy kola
+    Integrator v,y;       // stav systému kola
 public:
-    Kolo(Input F, double M, double D, double k);//:
-//    G("Výchylka", y, 0.01){}//,
-    //v((F-D*v-k*y)/M),
-    //y(v) {}
+    Kolo(Input F, double M, double D, double k):
+    G("Výchylka", y, 0.01){},
+    v((F-D*v-k*y)/M),
+    y(v) {}
 };
 
 Kolo k1(F, 2, 5.656, 400);

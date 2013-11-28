@@ -10,5 +10,5 @@
 
 double DSExpressionBlock::value()
 {
-    return expression->value();
+    return operand1->value();
 }
