@@ -10,8 +10,12 @@
 #define __ims__DSIntegratorBlock__
 
 #include <iostream>
+#include <cmath>
 #include "DSBlock.h"
 #include "DSEquation.h"
+
+double step;
+double time;
 
 typedef enum intType
 {
@@ -24,13 +28,27 @@ class DSIntegratorBlock: public DSBlock
 {
 protected:
     IntegratorType type = EULER;
-    DSBlock *theBlock;
+    DSEquation *theBlock;
+    double initialValue;
+    double finalValue = INFINITY;
+    double ABSteps[4] = {INFINITY,INFINITY,INFINITY,INFINITY};
 
-    public:
-    BSIntegratorBlock();
-    ~BSIntegratorBlock();
-    virtual double value();
-    void method(IntegratorType inType);
+public:
+    DSIntegratorBlock(DSEquation *block, double value);
+    ~DSIntegratorBlock();
+
+
+    virtual double value(){return finalValue;}
+
+    void method(IntegratorType inType){type = inType;}
+    void Init(double value){initialValue = value;}
+    void run();
+
+private:
+    void eulerMethod();
+    void rungeKuttMethoud();
+    void adamBMethoud();
+    double initABMethod()
 };
 
 #endif /* defined(__ims__DSIntegratorBlock__) */
