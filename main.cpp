@@ -38,8 +38,8 @@
 
 int main()
 {
-    DSParameterBlock op1(5), op2(3), op3(1);
-    DSEquation y = -op1 + op2 * op3;
+    DSParameterBlock op1(5), op2(3), op3(1), op4(4);
+    DSEquation y = (-op1 + op2 * op3 ) / op4 - op1;
     std::cout << y.value() << std::endl;
     return 0;
 }
