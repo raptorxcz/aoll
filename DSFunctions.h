@@ -9,6 +9,16 @@
 #ifndef ims_DSFunctions_h
 #define ims_DSFunctions_h
 
+void Init()
+{
+    
+}
+
+void Run()
+{
+    
+}
+
 
 
 #endif
