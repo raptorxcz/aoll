@@ -10,9 +10,6 @@
 /*
 const double F = 1.0;
 
-class Integrator;
-class Graph;
-class Input;
 class Kolo {
   //  Graph G;              // výstup polohy kola
     //Integrator v,y;       // stav systému kola
@@ -39,9 +36,9 @@ int main() {                  // popis experimentu
 
 int main()
 {
-    DSParameterBlock op1(5), op2(3);
-    DSExpressionBlock x = op1 + op2;
-    std::cout << x.value() << std::endl;
+    DSParameterBlock op1(5), op2(3), op3(1);
+    DSExpressionBlock y = op1 + op2 + op3;
+    std::cout << y.value() << std::endl;
     
     return 0;
 }
