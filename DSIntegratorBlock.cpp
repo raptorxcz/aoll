@@ -8,7 +8,20 @@
 
 #include "DSIntegratorBlock.h"
 
+
+
+DSIntegratorBlock::DSIntegratorBlock(DSEquation *block)
+{
+    theBlock = block;
+}
+
 double DSIntegratorBlock::value()
 {
     return 1;
+}
+
+
+void DSIntegratorBlock::method(IntegratorType inType)
+{
+    type = inType;
 }
