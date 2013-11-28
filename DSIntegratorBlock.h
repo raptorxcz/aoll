@@ -11,13 +11,26 @@
 
 #include <iostream>
 #include "DSBlock.h"
+#include "DSEquation.h"
+
+typedef enum intType
+{
+    EULER,
+    RUNGEKUTT,
+    ADAMB
+}IntegratorType;
 
 class DSIntegratorBlock: public DSBlock
 {
-    
-    
+protected:
+    IntegratorType type = EULER;
+    DSBlock *theBlock;
+
     public:
+    BSIntegratorBlock();
+    ~BSIntegratorBlock();
     virtual double value();
+    void method(IntegratorType inType);
 };
 
 #endif /* defined(__ims__DSIntegratorBlock__) */
