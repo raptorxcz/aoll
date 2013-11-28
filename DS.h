@@ -12,6 +12,8 @@
 #include "DSBlock.h"
     #include "DSExpressionBlock.h"
     #include "DSParameterBlock.h"
+    #include "DSIntegratorBlock.h"
+    #include "DSConstantBlock.h"
 
     #include "DSOperator1Block.h"
         #include "DSUnaryMinusBlock.h"
@@ -28,6 +30,11 @@ DSExpressionBlock operator+(DSBlock &v1, DSBlock &v2)
     DSBlock *p2 = &v2;
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
     return DSExpressionBlock(p);
+}
+
+DSExpressionBlock operator+(DSExpressionBlock &v1, DSBlock &v2)
+{
+    return DSExpressionBlock(v1);
 }
 
 DSExpressionBlock operator-(DSBlock &v1)
