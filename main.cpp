@@ -37,7 +37,7 @@ int main() {                  // popis experimentu
 int main()
 {
     DSParameterBlock op1(5), op2(3), op3(1);
-    DSExpressionBlock y = op1 + op2 + op3;
+    DSEquation y = op1 + op2 + op3;
     std::cout << y.value() << std::endl;
     
     return 0;

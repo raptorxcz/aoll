@@ -9,6 +9,7 @@
 #ifndef ims_DS_h
 #define ims_DS_h
 
+#include "DSEquation.h"
 #include "DSBlock.h"
     #include "DSParameterBlock.h"
     #include "DSIntegratorBlock.h"
@@ -25,24 +26,51 @@
         #include "DSMultiBlock.h"
         #include "DSDivideBlock.h"
 
-DSExpressionBlock operator+(DSBlock &v1, DSBlock &v2)
+DSEquation operator+(DSBlock &v1, DSBlock &v2)
 {
     DSBlock *p1 = &v1;
     DSBlock *p2 = &v2;
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
-    return DSExpressionBlock(p);
+    return DSEquation(p);
 }
 
-DSExpressionBlock operator+(DSExpressionBlock &v1, DSBlock &v2)
+DSEquation operator+(DSEquation v1, DSBlock &v2)
 {
-    return DSExpressionBlock(v1);
+    DSBlock *p1 = v1.getResult();
+    DSBlock *p2 = &v2;
+    DSPlusBlock *p = new DSPlusBlock(p1, p2);
+    return DSEquation(p);
 }
 
-DSExpressionBlock operator-(DSBlock &v1)
+DSEquation operator+(DSBlock &v1, DSEquation v2)
+{
+    DSBlock *p1 = &v1;
+    DSBlock *p2 = v2.getResult();
+    DSPlusBlock *p = new DSPlusBlock(p1, p2);
+    return DSEquation(p);
+}
+
+DSEquation operator+(DSEquation v1, DSEquation v2)
+{
+    DSBlock *p1 = v1.getResult();
+    DSBlock *p2 = v2.getResult();
+    DSPlusBlock *p = new DSPlusBlock(p1, p2);
+    return DSEquation(p);
+}
+
+DSEquation operator*(DSBlock v1, DSBlock v2)
+{
+    DSBlock *p1 = &v1;
+    DSBlock *p2 = &v2;
+    DSMultiBlock *p = new DSMultiBlock(p1, p2);
+    return DSEquation(p);
+}
+
+DSEquation operator-(DSBlock &v1)
 {
     DSBlock *p1 = &v1;
     DSUnaryMinusBlock *p = new DSUnaryMinusBlock(p1);
-    return DSExpressionBlock(p);
+    return DSEquation(p);
 }
 
 #endif
