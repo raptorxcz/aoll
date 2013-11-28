@@ -19,6 +19,7 @@ class DSParameterBlock : public DSBlock
     
     public:
     DSParameterBlock(double value):parameter(value){};
+    DSParameterBlock & operator=(const double &);
     void set(double val);
     virtual double value();
 };

@@ -12,4 +12,3 @@ double DSBlock::value()
 {
     return 0.0;
 }
-

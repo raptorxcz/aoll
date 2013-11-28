@@ -10,6 +10,7 @@
 #define __ims__SDBlock__
 
 #include <iostream>
+class DSParameterBlock;
 
 class DSBlock
 {
@@ -17,5 +18,7 @@ class DSBlock
 //    virtual void operator () (double x);
     virtual double value();
 };
+
+#include "DSParameterBlock.h"
 
 #endif /* defined(__ims__SDBlock__) */

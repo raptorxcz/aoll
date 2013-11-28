@@ -58,7 +58,7 @@ DSEquation operator+(DSEquation v1, DSEquation v2)
     return DSEquation(p);
 }
 
-DSEquation operator*(DSBlock v1, DSBlock v2)
+DSEquation operator*(DSBlock &v1, DSBlock &v2)
 {
     DSBlock *p1 = &v1;
     DSBlock *p2 = &v2;
@@ -66,9 +66,40 @@ DSEquation operator*(DSBlock v1, DSBlock v2)
     return DSEquation(p);
 }
 
+DSEquation operator*(DSBlock &v1, DSEquation v2)
+{
+    DSBlock *p1 = &v1;
+    DSBlock *p2 = v2.getResult();
+    DSMultiBlock *p = new DSMultiBlock(p1, p2);
+    return DSEquation(p);
+}
+
+DSEquation operator*(DSEquation v1, DSBlock &v2)
+{
+    DSBlock *p1 = v1.getResult();
+    DSBlock *p2 = &v2;
+    DSMultiBlock *p = new DSMultiBlock(p1, p2);
+    return DSEquation(p);
+}
+
+DSEquation operator*(DSEquation v1, DSEquation v2)
+{
+    DSBlock *p1 = v1.getResult();
+    DSBlock *p2 = v2.getResult();
+    DSMultiBlock *p = new DSMultiBlock(p1, p2);
+    return DSEquation(p);
+}
+
 DSEquation operator-(DSBlock &v1)
 {
     DSBlock *p1 = &v1;
+    DSUnaryMinusBlock *p = new DSUnaryMinusBlock(p1);
+    return DSEquation(p);
+}
+
+DSEquation operator-(DSEquation v1)
+{
+    DSBlock *p1 = v1.getResult();
     DSUnaryMinusBlock *p = new DSUnaryMinusBlock(p1);
     return DSEquation(p);
 }

@@ -17,3 +17,11 @@ double DSParameterBlock::value()
 {
     return parameter;
 }
+
+
+DSParameterBlock & DSParameterBlock::operator=(const double &x)
+{
+    set(x);
+    return *this;
+}
+
