@@ -9,56 +9,76 @@
 #include "DSIntegratorBlock.h"
 
 
+double DSIntegratorBlock::value()
+{
+    if(t.value() == currTime)
+    {
+        return parametr;
+    }
+    else
+    {
+        run();
+        return parametr;
+    }
+}
 
-//extern DSTime t;
-//DSIntegratorBlock::~DSIntegratorBlock()
-//{
-//    
-//}
-//
+
+DSIntegratorBlock::~DSIntegratorBlock()
+{
+
+}
+
 DSIntegratorBlock::DSIntegratorBlock(DSEquation block, double value)
 {
     equation = &block;
-    finalValue = value;
+    parametr = value;
+    currTime = t.value();
 }
-//
-//void DSIntegratorBlock::run()
-//{
-//    switch(type)
-//    {
-//    case EULER:
-//        void eulerMethod();
-//        break;
-//    case RUNGEKUTT:
-//        void rungeKuttMethoud();
-//        break;
-//    case ADAMB:
-//        void adamBMethoud();
-//        break;
-//    }
-//}
-//
+
+void DSIntegratorBlock::run()
+{
+    switch(type)
+    {
+    case EULER:
+        currTime = t.value();
+        void eulerMethod();
+        break;
+    case RUNGEKUTT:
+        void rungeKuttMethoud();
+        break;
+    case ADAMB:
+        void adamBMethoud();
+        break;
+    }
+}
+
 void DSIntegratorBlock::eulerMethod()
 {
-//    if(initialValue == INFINITY)
-//        finalValue = initialValue;
-    
-    finalValue += t.getStep()*equation->value();  //theBlock(t,finalValue);
+    parametr += t.getStep()*equation->value();
 }
-//
-//void DSIntegratorBlock::rungeKuttMethoud()
-//{
-//    (initialValue == INFINITY) ? (finalValue = initialValue) : (initialValue = initialValue);
-//
-//    theBlock->value();
-//    double k1 = step*theBlock(t,finalValue);
-//    double k2 = step*theBlock(t + step/2,finalValue + k1 / 2);
-//    double k3 = step*theBlock(t + step/2,finalValue + k2 / 2);
-//    double k4 = step*theBlock(t + h, finalValue + k3);
-//
-//    finalValue += 1/6 *(k1 + 2*k2 + 2*k3 + k4);
-//}
-//
+
+void DSIntegratorBlock::rungeKuttMethoud()
+{
+    double assist = parametr;
+    double k1 = t.getStep()*equation->value();
+
+    currTime = t.value() - t.getStep() / 2;
+    t.setTime(currTime);
+    parametr = assist + k1/2;
+    double k2 = t.getStep() *equation->value();
+
+    parametr = assist + k2/2;
+    double k3 = t.getStep() *equation->value();
+
+    t.setTime(currTime + t.getStep()/2);
+    currTime =t.value();
+    parametr = assist + k3;
+    double k4 = t.getStep() *equation->value();
+
+    parametr += 1/6 *(k1 + 2*k2 + 2*k3 + k4);
+}
+
+
 //void DSIntegratorBlock::adamBMethoud()
 //{
 //    (initialValue == INFINITY) ? (finalValue = initialValue) : (initialValue = initialValue);
