@@ -23,14 +23,10 @@ double DSIntegratorBlock::value()
 }
 
 
-DSIntegratorBlock::~DSIntegratorBlock()
-{
-
-}
 
 DSIntegratorBlock::DSIntegratorBlock(DSEquation block, double value)
 {
-    equation = &block;
+    equation = block.getResult();
     parametr = value;
     currTime = t.value();
 }
@@ -41,7 +37,7 @@ void DSIntegratorBlock::run()
     {
     case EULER:
         currTime = t.value();
-        void eulerMethod();
+        eulerMethod();
         break;
     case RUNGEKUTT:
         void rungeKuttMethoud();

@@ -30,7 +30,7 @@ public:
     virtual double value();
 protected:
     IntegratorType type;
-    DSEquation *equation;
+    DSBlock *equation;
     double parametr;
     double currTime;
     
