@@ -8,11 +8,11 @@
 
 #ifndef ims_DSFunctions_h
 #define ims_DSFunctions_h
-
+#include "DSTime.h"
 
 void Init()
 {
-//    t = new DSTime(0, 10, 0.01);
+    t = DSTime(0, 1, 0.5);
 }
 
 void Run()

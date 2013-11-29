@@ -14,8 +14,6 @@
 
 class DSTime : public DSBlock
 {
-//    double minStep;
-//    double maxStep;
     double currentTime;
     double startTime;
     double endTime;
@@ -30,5 +28,7 @@ public:
     virtual double value();
     double getStep();
 };
+
+extern DSTime t;
 
 #endif /* defined(__ims__DSTime__) */
