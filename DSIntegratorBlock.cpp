@@ -39,7 +39,7 @@ void DSIntegratorBlock::run()
         eulerMethod();
         break;
     case RUNGEKUTT:
-        void rungeKuttMethoud();
+        rungeKuttMethoud();
         break;
     case ADAMB:
         void adamBMethoud();
@@ -49,12 +49,16 @@ void DSIntegratorBlock::run()
 
 void DSIntegratorBlock::eulerMethod()
 {
-    parametr += t.getStep()*equation->value();
+    t.setTime(t.value() - t.getStep());
     currTime = t.value();
+    parametr += t.getStep()*equation->value();
+    
 }
 
 void DSIntegratorBlock::rungeKuttMethoud()
 {
+    t.setTime(t.value() - t.getStep());
+    currTime = t.value();
     double assist = parametr;
     double k1 = t.getStep()*equation->value();
 

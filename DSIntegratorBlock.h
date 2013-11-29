@@ -29,7 +29,7 @@ public:
     DSIntegratorBlock(DSEquation block, double value);
     virtual double value();
 protected:
-    IntegratorType type;
+    IntegratorType type = RUNGEKUTT;
     DSBlock *equation;
     double parametr;
     double currTime;

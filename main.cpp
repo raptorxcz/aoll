@@ -31,7 +31,7 @@ Mtd m(2);
 void Sample() {
 //    std::cout  <<  t.value() << " " << L.x1.value() << std::endl;
 //    printf("%6.2f %g %g\n", t.value(), L.x1.value(), L.x2.value());
-        printf("%6.2f %g\n", t.value(), m.y.value());
+        printf("%6.2f\t %12.6f\n", t.value(), m.y.value());
 //    fprintf(stdout, "%6.2f %g\n", t.value(), L.x1.value());
 }
 
@@ -42,7 +42,7 @@ int main()
 //    DSParameterBlock op1(5), op2(3), op3(1), op4(4);
 //    DSEquation y = (-op1 + op2 * op3 ) / op4 - op1;
 //    std::cout << y.value() << std::endl;
-    Init(0, 1.4);
+    Init(0, 10);
     Run();
     return 0;
 }
