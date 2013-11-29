@@ -48,7 +48,7 @@ private:
     void eulerMethod();
     void rungeKuttMethoud();
     void adamBMethoud();
-    double initABMethod()
+    double initABMethod();
 };
 
 #endif /* defined(__ims__DSIntegratorBlock__) */
