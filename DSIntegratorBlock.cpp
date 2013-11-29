@@ -36,7 +36,6 @@ void DSIntegratorBlock::run()
     switch(type)
     {
     case EULER:
-        currTime = t.value();
         eulerMethod();
         break;
     case RUNGEKUTT:
@@ -51,6 +50,7 @@ void DSIntegratorBlock::run()
 void DSIntegratorBlock::eulerMethod()
 {
     parametr += t.getStep()*equation->value();
+    currTime = t.value();
 }
 
 void DSIntegratorBlock::rungeKuttMethoud()
