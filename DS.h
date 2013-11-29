@@ -9,6 +9,7 @@
 #ifndef ims_DS_h
 #define ims_DS_h
 
+#include "DSSampler.h"
 #include "DSEquation.h"
 #include "DSBlock.h"
     #include "DSParameterBlock.h"

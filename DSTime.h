@@ -25,6 +25,8 @@ public:
     {
         currentTime = startTime;
     };
+    bool incrementTime();
+    bool isCurrentTimeValid();
     virtual double value();
     double getStep();
 };

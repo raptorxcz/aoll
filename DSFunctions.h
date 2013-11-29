@@ -10,14 +10,18 @@
 #define ims_DSFunctions_h
 #include "DSTime.h"
 
-void Init()
+void Init(double start, double stop)
 {
-    t = DSTime(0, 1, 0.5);
+    t = DSTime(start, stop, runSampler.step);
 }
 
 void Run()
 {
-    
+    while (t.isCurrentTimeValid())
+    {
+        runSampler.function();
+        t.incrementTime();
+    }
 }
 
 

@@ -18,4 +18,15 @@ double DSTime::getStep()
     return step;
 }
 
+bool DSTime::isCurrentTimeValid()
+{
+    return currentTime <= endTime;
+}
+
+bool DSTime::incrementTime()
+{
+    currentTime += step;
+    return currentTime <= endTime;
+}
+
 DSTime t(0, 1, 0.01);
