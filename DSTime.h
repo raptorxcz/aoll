@@ -15,6 +15,7 @@
 class DSTime : public DSBlock
 {
     double currentTime;
+    double baseTime;
     double startTime;
     double endTime;
     double step;
@@ -29,6 +30,7 @@ public:
     bool isCurrentTimeValid();
     virtual double value();
     double getStep();
+    void setTime(double time);
 };
 
 extern DSTime t;

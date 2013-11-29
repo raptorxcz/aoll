@@ -25,8 +25,14 @@ bool DSTime::isCurrentTimeValid()
 
 bool DSTime::incrementTime()
 {
-    currentTime += step;
+    baseTime += step;
+    currentTime = baseTime;
     return currentTime <= endTime;
+}
+
+void DSTime::setTime(double time)
+{
+    currentTime = time;
 }
 
 DSTime t(0, 1, 0.01);
