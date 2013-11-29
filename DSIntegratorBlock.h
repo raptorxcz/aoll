@@ -13,8 +13,7 @@
 #include <cmath>
 #include "DSBlock.h"
 #include "DSEquation.h"
-
-double step;
+#include "DSTime.h"
 
 typedef enum intType
 {
@@ -23,32 +22,50 @@ typedef enum intType
     ADAMB
 }IntegratorType;
 
-class DSIntegratorBlock: public DSBlock
+
+class DSIntegratorBlock : public DSBlock
 {
-protected:
-    IntegratorType type = EULER;
-    DSEquation *theBlock;
-    double initialValue;
-    double finalValue = INFINITY;
-    double ABSteps[4] = {INFINITY,INFINITY,INFINITY,INFINITY};
-
 public:
-    DSIntegratorBlock(DSEquation *block, double value);
-    ~DSIntegratorBlock();
-
-
+    DSIntegratorBlock(DSEquation block, double value);
     virtual double value(){return finalValue;}
-
-    void method(IntegratorType inType){type = inType;}
-    void Init(double value){initialValue = value;}
-    void run();
-
+protected:
+    IntegratorType type;
+    DSEquation *equation;
+    double finalValue;
+    
 private:
     void eulerMethod();
-    void rungeKuttMethoud();
-    void adamBMethoud();
-    double initABMethod();
 };
+
+//double step;
+//
+//
+//class DSIntegratorBlock: public DSBlock
+//{
+//protected:
+//    IntegratorType type = EULER;
+//    DSEquation *theBlock;
+//    double initialValue;
+//    double finalValue = INFINITY;
+//    double ABSteps[4] = {INFINITY,INFINITY,INFINITY,INFINITY};
+//
+//public:
+//    DSIntegratorBlock(DSEquation block, double value);
+////    ~DSIntegratorBlock();
+//
+//
+//
+//
+//    void method(IntegratorType inType){type = inType;}
+//    void Init(double value){initialValue = value;}
+//    void run();
+//
+//private:
+//    void eulerMethod();
+////    void rungeKuttMethoud();
+////    void adamBMethoud();
+////    double initABMethod();
+//};
 
 #endif /* defined(__ims__DSIntegratorBlock__) */
 //komentar pro git

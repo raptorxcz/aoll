@@ -17,3 +17,5 @@ double DSTime::getStep()
 {
     return step;
 }
+
+DSTime t(0, 1, 0.01);
