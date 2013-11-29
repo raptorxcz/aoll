@@ -9,9 +9,10 @@
 #ifndef ims_DSFunctions_h
 #define ims_DSFunctions_h
 
+
 void Init()
 {
-    
+//    t = new DSTime(0, 10, 0.01);
 }
 
 void Run()

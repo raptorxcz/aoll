@@ -14,14 +14,21 @@
 
 class DSTime : public DSBlock
 {
-    double minStep;
-    double maxStep;
+//    double minStep;
+//    double maxStep;
     double currentTime;
-    double minTime;
-    double maxTime;
+    double startTime;
+    double endTime;
+    double step;
     
 public:
+    DSTime(double aStartTime, double anEndTime, double aStep):
+    startTime(aStartTime), endTime(anEndTime), step(aStep)
+    {
+        currentTime = startTime;
+    };
     virtual double value();
+    double getStep();
 };
 
 #endif /* defined(__ims__DSTime__) */

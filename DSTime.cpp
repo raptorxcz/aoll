@@ -12,3 +12,8 @@ double DSTime::value()
 {
     return currentTime;
 }
+
+double DSTime::getStep()
+{
+    return step;
+}

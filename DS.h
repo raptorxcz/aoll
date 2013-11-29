@@ -30,6 +30,6 @@
 #include "DSOperations.h"
 #include "DSFunctions.h"
 
-DSTime t;
+DSTime *t;
 
 #endif
