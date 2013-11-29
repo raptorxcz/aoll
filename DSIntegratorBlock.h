@@ -27,14 +27,18 @@ class DSIntegratorBlock : public DSBlock
 {
 public:
     DSIntegratorBlock(DSEquation block, double value);
-    virtual double value(){return finalValue;}
+    virtual double value();
 protected:
     IntegratorType type;
     DSEquation *equation;
-    double finalValue;
+    double parametr;
+    double currTime;
     
 private:
+    void run();
     void eulerMethod();
+    void rungeKuttMethoud();
+    void adamBMethoud();
 };
 
 //double step;
