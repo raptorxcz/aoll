@@ -20,14 +20,23 @@ double DSTime::getStep()
 
 bool DSTime::isCurrentTimeValid()
 {
-    return currentTime <= endTime;
+    return running;
 }
 
 bool DSTime::incrementTime()
 {
-    baseTime += step;
-    currentTime = baseTime;
-    return currentTime <= endTime;
+    if(running)
+    {
+        if(baseTime < endTime)
+        {
+            baseTime += step;
+            currentTime = baseTime;
+        }
+        else
+            running = false;
+    }
+    
+    return running;
 }
 
 void DSTime::setTime(double time)

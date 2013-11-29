@@ -19,6 +19,7 @@ class DSTime : public DSBlock
     double startTime;
     double endTime;
     double step;
+    double running = true;
     
 public:
     DSTime(double aStartTime, double anEndTime, double aStep):
