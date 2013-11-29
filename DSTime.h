@@ -1,0 +1,34 @@
+//
+//  DSTime.h
+//  ims
+//
+//  Created by Kryštof Matěj on 29.11.13.
+//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//
+
+#ifndef __ims__DSTime__
+#define __ims__DSTime__
+
+#include <iostream>
+#include "DSBlock.h"
+
+class DSTime : public DSBlock
+{
+//    double minStep;
+//    double maxStep;
+    double currentTime;
+    double startTime;
+    double endTime;
+    double step;
+    
+public:
+    DSTime(double aStartTime, double anEndTime, double aStep):
+    startTime(aStartTime), endTime(anEndTime), step(aStep)
+    {
+        currentTime = startTime;
+    };
+    virtual double value();
+    double getStep();
+};
+
+#endif /* defined(__ims__DSTime__) */

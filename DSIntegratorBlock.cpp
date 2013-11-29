@@ -43,6 +43,7 @@ void DSIntegratorBlock::rungeKuttMethoud()
 {
     (initialValue == INFINITY) ? (finalValue = initialValue) : (initialValue = initialValue);
 
+    theBlock->value();
     double k1 = step*theBlock(t,finalValue);
     double k2 = step*theBlock(t + step/2,finalValue + k1 / 2);
     double k3 = step*theBlock(t + step/2,finalValue + k2 / 2);

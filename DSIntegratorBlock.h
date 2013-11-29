@@ -15,7 +15,6 @@
 #include "DSEquation.h"
 
 double step;
-double time;
 
 typedef enum intType
 {
