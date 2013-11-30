@@ -84,12 +84,12 @@ void DSIntegratorBlock::adamBMethoud()
 {
     int initFlag = 0;
 
-    for(int i = 0; i < 3;i++)
+    for(int i = 0; i < 4;i++)
     {
         if(ABSteps[i] == INFINITY)
         {
-
-            ABSteps[i] = equation->value();
+            rungeKuttMethoud();
+            ABSteps[i] = parametr;
             currTime = t.value();
             initFlag = 1;
             break;
@@ -98,7 +98,7 @@ void DSIntegratorBlock::adamBMethoud()
 
     if(!initFlag)
     {
-        ABSteps[3] = equation->value();
+        ABSteps[3] = parametr;
         parametr += (t.getStep() / 24)* (55*ABSteps[3] - 59 * ABSteps[2]  + 37 * ABSteps[1]  - 9 * ABSteps[0]);
         ABSteps[0] = ABSteps[1];
         ABSteps[1] = ABSteps[2];

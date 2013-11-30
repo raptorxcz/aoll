@@ -44,4 +44,3 @@ private:
 extern intType integratorType;
 
 #endif /* defined(__ims__DSIntegratorBlock__) */
-//komentar pro git
