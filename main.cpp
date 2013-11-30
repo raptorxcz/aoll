@@ -22,11 +22,10 @@
 
 struct Mtd {
     DSIntegratorBlock y;
-    DSParameterBlock x;
-    Mtd(double c): x(c), y(t + x*y, 0){};
+    Mtd(): y(t + 2*y, 0){};
 };
 
-Mtd m(2);
+Mtd m;
 
 void Sample() {
 //    std::cout  <<  t.value() << " " << L.x1.value() << std::endl;
