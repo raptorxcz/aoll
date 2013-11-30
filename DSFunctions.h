@@ -30,6 +30,23 @@ void Run()
     }
 }
 
+void setAccuracy(double rel)
+{
+    eRel = rel;
+    eAbs = 0;
+}
+
+void setAccuracy(double abs, double rel)
+{
+    eAbs = abs;
+    eRel = rel;
+}
+
+void setMinMaxStep(double min, double max)
+{
+    t.setMinMaxStep(min, max);
+}
+
 
 
 #endif

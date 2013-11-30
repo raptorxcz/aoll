@@ -9,10 +9,13 @@
 #include "DSIntegratorBlock.h"
 
 intType integratorType = EULER;
+double eAbs = 0.1;
+double eRel = 0.1;
+bool lock;
 
 double DSIntegratorBlock::value()
 {
-    if(t.value() <= currTime)
+    if(t.value() <= currTime || lock)
         return parametr;
     else
     {
@@ -23,6 +26,7 @@ double DSIntegratorBlock::value()
 
 DSIntegratorBlock::DSIntegratorBlock(DSBlock &block, double value)
 {
+    lock = false;
     ABSteps[0] = INFINITY;
     ABSteps[1] = INFINITY;
     ABSteps[2] = INFINITY;
@@ -34,6 +38,7 @@ DSIntegratorBlock::DSIntegratorBlock(DSBlock &block, double value)
 
 DSIntegratorBlock::DSIntegratorBlock(DSEquation block, double value)
 {
+    lock = false;
     ABSteps[0] = INFINITY;
     ABSteps[1] = INFINITY;
     ABSteps[2] = INFINITY;
@@ -45,6 +50,8 @@ DSIntegratorBlock::DSIntegratorBlock(DSEquation block, double value)
 
 void DSIntegratorBlock::run()
 {
+    lock = true;
+    
     switch(integratorType)
     {
     case EULER:
@@ -57,14 +64,32 @@ void DSIntegratorBlock::run()
         adamBMethod();
         break;
     }
+    
+    lock = false;
 }
 
 void DSIntegratorBlock::eulerMethod()
 {
-    t.setTime(t.value() - t.getStep());
+    double increment;
+    increment = t.getStep()*equation->value();
+    int count = 1;
+    
+//    while(!(increment <= eAbs || parametr*eRel >= increment))
+//    {
+//        double newStep = t.getStep() / 2;
+////        t.clear();
+////        t.setTime(t.value() - t.getStep() + newStep);
+//        currTime = t.value();
+//        t.setStep(newStep);
+////        lock = false;
+//        increment = t.getStep()*equation->value();
+////        lock = true;
+//        count *= 2;
+//    }
+    
+    parametr += increment;
+    
     currTime = t.value();
-    parametr += t.getStep()*equation->value();
-    t.clear();
 }
 
 void DSIntegratorBlock::rungeKuttMethod()

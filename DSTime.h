@@ -19,13 +19,20 @@ class DSTime : public DSBlock
     double startTime;
     double endTime;
     double step;
+    double baseStep;
     double running;
+    double minStep;
+    double maxStep;
     
 public:
     DSTime(double aStartTime, double anEndTime, double aStep):
-    startTime(aStartTime), endTime(anEndTime), step(aStep)
+    startTime(aStartTime), endTime(anEndTime), step(aStep), baseStep(step)
     {
-        running = true;
+        if(anEndTime <= aStartTime)
+            running = false;
+        else
+            running = true;
+        
         currentTime = startTime;
         baseTime = startTime;
     }
@@ -35,6 +42,14 @@ public:
     virtual double value();
     double getStep();
     void setTime(double time);
+    void setStep(double aStep);
+    void clearStep();
+    double getMinStep(){ return minStep; }
+    double getMaxStep(){ return maxStep; }
+    void setMinMaxStep(double min, double max){
+        minStep = min;
+        maxStep = max;
+    }
 };
 
 extern DSTime t;

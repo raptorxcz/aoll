@@ -23,12 +23,25 @@ bool DSTime::isCurrentTimeValid()
     return running;
 }
 
+void DSTime::setStep(double aStep)
+{
+    step = aStep;
+}
+
+void DSTime::clearStep()
+{
+    step = baseStep;
+}
+
+
 bool DSTime::incrementTime()
 {
     double newTime = 0;
+    clearStep();
+    
     if(running)
     {
-        if(baseTime < endTime && (newTime = baseTime + step) <= endTime)
+        if(baseTime < endTime && (newTime = baseTime + baseStep) <= endTime)
         {
             baseTime = newTime;
             currentTime = baseTime;
@@ -37,6 +50,7 @@ bool DSTime::incrementTime()
         {
             baseTime = endTime;
             currentTime = baseTime;
+            running = false;
         }
         else
             running = false;

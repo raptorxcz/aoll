@@ -34,6 +34,7 @@ protected:
     double parametr;
     double currTime;
     double ABSteps[4];
+    double buffer;
     
 private:
     void run();
@@ -43,5 +44,7 @@ private:
 };
 
 extern intType integratorType;
+extern double eAbs;
+extern double eRel;
 
 #endif /* defined(__ims__DSIntegratorBlock__) */
