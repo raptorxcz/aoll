@@ -12,14 +12,52 @@ intType integratorType = EULER;
 double eAbs = 0.1;
 double eRel = 0.1;
 bool lock;
+bool flagDecrementStep = false;
+bool flagReset = false;
 
 double DSIntegratorBlock::value()
 {
+    if(flagReset)
+    {
+        currTime = resetCurrentTime;
+        parametr = resetParameter;
+        //pri zaplneni
+        if(integratorType == ADAMB)
+        {
+            if(ABSteps[0] != INFINITY && ABSteps[1] != INFINITY && ABSteps[2] != INFINITY && ABSteps[3] != INFINITY)
+            {
+                ABSteps[3] = ABSteps[2];
+                ABSteps[2] = ABSteps[1];
+                ABSteps[1] = ABSteps[0];
+                ABSteps[0] = resetLastABStep;
+            }
+            else
+            {
+                for (int i = 3; i <= 0; i--)
+                {
+                    if(ABSteps[i] != INFINITY)
+                    {
+                        ABSteps[i] = resetLastABStep;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
     if(t.value() <= currTime || lock)
         return parametr;
     else
     {
         run();
+        
+        if(!flagDecrementStep)
+        {
+            resetCurrentTime = currTime;
+            resetParameter = parametr;
+            resetLastABStep = ABSteps[0];
+        }
+        
         return parametr;
     }
 }
@@ -34,6 +72,9 @@ DSIntegratorBlock::DSIntegratorBlock(DSBlock &block, double value)
     equation = &block;
     parametr = value;
     currTime = t.value();
+    resetCurrentTime = currTime;
+    resetParameter = parametr;
+    resetLastABStep = INFINITY;
 };
 
 DSIntegratorBlock::DSIntegratorBlock(DSEquation block, double value)
@@ -46,6 +87,9 @@ DSIntegratorBlock::DSIntegratorBlock(DSEquation block, double value)
     equation = block.getResult();
     parametr = value;
     currTime = t.value();
+    resetCurrentTime = currTime;
+    resetParameter = parametr;
+    resetLastABStep = INFINITY;
 }
 
 void DSIntegratorBlock::run()
@@ -70,25 +114,12 @@ void DSIntegratorBlock::run()
 
 void DSIntegratorBlock::eulerMethod()
 {
-    double increment;
-    increment = t.getStep()*equation->value();
-    int count = 1;
+    double increment = t.getStep()*equation->value();
     
-//    while(!(increment <= eAbs || parametr*eRel >= increment))
-//    {
-//        double newStep = t.getStep() / 2;
-////        t.clear();
-////        t.setTime(t.value() - t.getStep() + newStep);
-//        currTime = t.value();
-//        t.setStep(newStep);
-////        lock = false;
-//        increment = t.getStep()*equation->value();
-////        lock = true;
-//        count *= 2;
-//    }
+    if(!(increment <= eAbs || parametr*eRel >= increment))
+        flagDecrementStep = true;
     
     parametr += increment;
-    
     currTime = t.value();
 }
 
@@ -141,8 +172,6 @@ void DSIntegratorBlock::adamBMethod()
         ABSteps[2] = ABSteps[3];
         currTime = t.value();
         ABSteps[3] = equation->value();
-        
-        
     }
 }
 

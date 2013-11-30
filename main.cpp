@@ -38,7 +38,7 @@ prepre L;
 void Sample() {
     //    std::cout  <<  t.value() << " " << L.x1.value() << std::endl;
     //    printf("%6.2f\t %g\t %g\n", t.value(), L.x1.value(), L.x2.value());
-    printf("%6.2f\t %g\t %g\n", t.value(), L.x1.value(), L.x2.value());
+    Print("%6.2f\t %g\t %g\n", t.value(), L.x1.value(), L.x2.value());
     //        printf("%6.2f\t %12.6f\n", t.value(), m.y.value());
     //    fprintf(stdout, "%6.2f %g\n", t.value(), L.x1.value());
 }

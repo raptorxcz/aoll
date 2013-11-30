@@ -42,6 +42,7 @@ public:
     virtual double value();
     double getStep();
     void setTime(double time);
+    void stepBack();
     void setStep(double aStep);
     void clearStep();
     double getMinStep(){ return minStep; }

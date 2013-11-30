@@ -33,15 +33,20 @@ void DSTime::clearStep()
     step = baseStep;
 }
 
+void DSTime::stepBack()
+{
+    baseTime -= step;
+    currentTime = baseTime;
+}
+
 
 bool DSTime::incrementTime()
 {
     double newTime = 0;
-    clearStep();
     
     if(running)
     {
-        if(baseTime < endTime && (newTime = baseTime + baseStep) <= endTime)
+        if(baseTime < endTime && (newTime = baseTime + step) <= endTime)
         {
             baseTime = newTime;
             currentTime = baseTime;
