@@ -12,7 +12,7 @@ intType integratorType = EULER;
 
 double DSIntegratorBlock::value()
 {
-    if(t.value() == currTime) // <=
+    if(t.value() <= currTime) // <=
     {
         return parametr;
     }
