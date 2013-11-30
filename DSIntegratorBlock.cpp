@@ -79,30 +79,31 @@ void DSIntegratorBlock::rungeKuttMethoud()
 }
 
 
-//void DSIntegratorBlock::adamBMethoud()
-//{
-//    (initialValue == INFINITY) ? (finalValue = initialValue) : (initialValue = initialValue);
-//
-//    int initFlag = 0;
-//
-//    for(int i = 0; i < 3;i++)
-//    {
-//        if(ABSteps[i] == INFINITY)
-//        {
-//            ABSteps[i] = initABMethod();
-//            initFlag = 1;
-//            break;
-//        }
-//    }
-//
-//    if(!initFlag)
-//    {
-//        ABSteps[3] = theBlock(t,finalValue);
-//        finalValue += (step / 24)* (55*ABSteps[3] - 59 * ABSteps[2]  + 37 * ABSteps[1]  - 9 * ABSteps[0]);
-//        ABSteps[0] = ABSteps[1];
-//        ABSteps[1] = ABSteps[2];
-//        ABSteps[2] = ABSteps[3];
-//    }
-//}
-//
+void DSIntegratorBlock::adamBMethoud()
+{
+    int initFlag = 0;
+
+    for(int i = 0; i < 3;i++)
+    {
+        if(ABSteps[i] == INFINITY)
+        {
+
+            ABSteps[i] = equation->value();
+            currTime = t.value();
+            initFlag = 1;
+            break;
+        }
+    }
+
+    if(!initFlag)
+    {
+        ABSteps[3] = equation->value();
+        parametr += (t.getStep() / 24)* (55*ABSteps[3] - 59 * ABSteps[2]  + 37 * ABSteps[1]  - 9 * ABSteps[0]);
+        ABSteps[0] = ABSteps[1];
+        ABSteps[1] = ABSteps[2];
+        ABSteps[2] = ABSteps[3];
+        currTime = t.value();
+    }
+}
+
 

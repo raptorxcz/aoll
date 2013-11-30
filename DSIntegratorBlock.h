@@ -29,10 +29,11 @@ public:
     DSIntegratorBlock(DSEquation block, double value);
     virtual double value();
 protected:
-    IntegratorType type = RUNGEKUTT;
+    IntegratorType type = EULER;
     DSBlock *equation;
     double parametr;
     double currTime;
+    double ABSteps[4] = {INFINITY,INFINITY,INFINITY,INFINITY};
     
 private:
     void run();
