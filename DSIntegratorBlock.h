@@ -37,8 +37,8 @@ protected:
 private:
     void run();
     void eulerMethod();
-    void rungeKuttMethoud();
-    void adamBMethoud();
+    void rungeKuttMethod();
+    void adamBMethod();
 };
 
 extern intType integratorType;

@@ -56,7 +56,7 @@ void DSIntegratorBlock::eulerMethod()
     
 }
 
-void DSIntegratorBlock::rungeKuttMethoud()
+void DSIntegratorBlock::rungeKuttMethod()
 {
     t.setTime(t.value() - t.getStep());
     currTime = t.value();
@@ -80,7 +80,7 @@ void DSIntegratorBlock::rungeKuttMethoud()
 }
 
 
-void DSIntegratorBlock::adamBMethoud()
+void DSIntegratorBlock::adamBMethod()
 {
     int initFlag = 0;
 
@@ -88,7 +88,7 @@ void DSIntegratorBlock::adamBMethoud()
     {
         if(ABSteps[i] == INFINITY)
         {
-            rungeKuttMethoud();
+            rungeKuttMethod();
             ABSteps[i] = parametr;
             currTime = t.value();
             initFlag = 1;
