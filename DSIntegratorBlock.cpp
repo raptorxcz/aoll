@@ -8,6 +8,7 @@
 
 #include "DSIntegratorBlock.h"
 
+intType integratorType = EULER;
 
 double DSIntegratorBlock::value()
 {
@@ -33,7 +34,7 @@ DSIntegratorBlock::DSIntegratorBlock(DSEquation block, double value)
 
 void DSIntegratorBlock::run()
 {
-    switch(type)
+    switch(integratorType)
     {
     case EULER:
         eulerMethod();
@@ -42,7 +43,7 @@ void DSIntegratorBlock::run()
         rungeKuttMethoud();
         break;
     case ADAMB:
-        void adamBMethoud();
+        adamBMethoud();
         break;
     }
 }

@@ -29,7 +29,6 @@ public:
     DSIntegratorBlock(DSEquation block, double value);
     virtual double value();
 protected:
-    IntegratorType type = EULER;
     DSBlock *equation;
     double parametr;
     double currTime;
@@ -42,35 +41,7 @@ private:
     void adamBMethoud();
 };
 
-//double step;
-//
-//
-//class DSIntegratorBlock: public DSBlock
-//{
-//protected:
-//    IntegratorType type = EULER;
-//    DSEquation *theBlock;
-//    double initialValue;
-//    double finalValue = INFINITY;
-//    double ABSteps[4] = {INFINITY,INFINITY,INFINITY,INFINITY};
-//
-//public:
-//    DSIntegratorBlock(DSEquation block, double value);
-////    ~DSIntegratorBlock();
-//
-//
-//
-//
-//    void method(IntegratorType inType){type = inType;}
-//    void Init(double value){initialValue = value;}
-//    void run();
-//
-//private:
-//    void eulerMethod();
-////    void rungeKuttMethoud();
-////    void adamBMethoud();
-////    double initABMethod();
-//};
+extern intType integratorType;
 
 #endif /* defined(__ims__DSIntegratorBlock__) */
 //komentar pro git
