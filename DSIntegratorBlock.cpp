@@ -102,9 +102,10 @@ void DSIntegratorBlock::adamBMethod()
         ABSteps[0] = ABSteps[1];
         ABSteps[1] = ABSteps[2];
         ABSteps[2] = ABSteps[3];
+        currTime = t.value();
         ABSteps[3] = equation->value();
         
-        currTime = t.value();
+        
     }
 }
 
