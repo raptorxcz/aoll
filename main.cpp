@@ -36,15 +36,15 @@ void Sample() {
 }
 
 
-DSSampler S(Sample, 0.001);
+DSSampler S(Sample, 0.01);
 
 int main()
 {
-    setMethod(RUNGEKUTT);
+    setMethod(ADAMB);
 //    DSParameterBlock op1(5), op2(3), op3(1), op4(4);
 //    DSEquation y = (-op1 + op2 * op3 ) / op4 - op1;
 //    std::cout << y.value() << std::endl;
-    Init(0, 30);
+    Init(0, 60);
     Run();
     return 0;
 }

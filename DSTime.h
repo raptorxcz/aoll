@@ -27,6 +27,7 @@ public:
     {
         running = true;
         currentTime = startTime;
+        baseTime = startTime;
     }
     bool incrementTime();
     bool isCurrentTimeValid();
