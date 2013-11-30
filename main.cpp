@@ -35,14 +35,14 @@ void Sample() {
 //    fprintf(stdout, "%6.2f %g\n", t.value(), L.x1.value());
 }
 
-DSSampler S(Sample, 0.25);
+DSSampler S(Sample, 0.05);
 
 int main()
 {
 //    DSParameterBlock op1(5), op2(3), op3(1), op4(4);
 //    DSEquation y = (-op1 + op2 * op3 ) / op4 - op1;
 //    std::cout << y.value() << std::endl;
-    Init(0, 10);
+    Init(0, 2);
     Run();
     return 0;
 }

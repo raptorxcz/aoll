@@ -9,6 +9,12 @@
 #ifndef ims_DSFunctions_h
 #define ims_DSFunctions_h
 #include "DSTime.h"
+#include "DSIntegratorBlock.h"
+
+void setMethod(intType it)
+{
+    integratorType = it;
+}
 
 void Init(double start, double stop)
 {
