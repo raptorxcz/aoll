@@ -19,14 +19,15 @@ class DSTime : public DSBlock
     double startTime;
     double endTime;
     double step;
-    double running = true;
+    double running;
     
 public:
     DSTime(double aStartTime, double anEndTime, double aStep):
     startTime(aStartTime), endTime(anEndTime), step(aStep)
     {
+        running = true;
         currentTime = startTime;
-    };
+    }
     bool incrementTime();
     bool isCurrentTimeValid();
     virtual double value();

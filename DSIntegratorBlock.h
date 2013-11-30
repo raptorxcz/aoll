@@ -32,7 +32,7 @@ protected:
     DSBlock *equation;
     double parametr;
     double currTime;
-    double ABSteps[4] = {INFINITY,INFINITY,INFINITY,INFINITY};
+    double ABSteps[4];
     
 private:
     void run();

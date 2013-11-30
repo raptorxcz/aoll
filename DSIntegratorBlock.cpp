@@ -27,6 +27,10 @@ double DSIntegratorBlock::value()
 
 DSIntegratorBlock::DSIntegratorBlock(DSEquation block, double value)
 {
+    ABSteps[0] = INFINITY;
+    ABSteps[1] = INFINITY;
+    ABSteps[2] = INFINITY;
+    ABSteps[3] = INFINITY;
     equation = block.getResult();
     parametr = value;
     currTime = t.value();

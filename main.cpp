@@ -7,6 +7,7 @@
 //
 
 #include "DS.h"
+#include <cstdio>
 
 struct Lorenz {
     DSIntegratorBlock x1, x2, x3;
@@ -15,7 +16,7 @@ struct Lorenz {
     p1(sigma), p2(lambda), p3(b), p4(1),
     x1(p1*(x2 - x1), 1),           // dx1/dt = sigma * (x2 - x1)
     x2((p4 + p2 - x3)*x1 - x2, 1), // dx2/dt = (1 + lambda - x3) * x1 - x2
-    x3(x1*x2 - p3*x3, 1){};          // dx1/dt = sigma * (x2 - x1)
+    x3(x1*x2 - p3*x3, 1){}          // dx1/dt = sigma * (x2 - x1)
 };
 
 Lorenz L(10, 24, 2);
@@ -35,11 +36,11 @@ void Sample() {
 }
 
 
-DSSampler S(Sample, 0.01);
+DSSampler S(Sample, 0.001);
 
 int main()
 {
-    setMethod(ADAMB);
+    setMethod(RUNGEKUTT);
 //    DSParameterBlock op1(5), op2(3), op3(1), op4(4);
 //    DSEquation y = (-op1 + op2 * op3 ) / op4 - op1;
 //    std::cout << y.value() << std::endl;
