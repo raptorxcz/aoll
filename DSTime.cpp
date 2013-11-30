@@ -25,11 +25,17 @@ bool DSTime::isCurrentTimeValid()
 
 bool DSTime::incrementTime()
 {
+    double newTime = 0;
     if(running)
     {
-        if(baseTime < endTime)
+        if(baseTime < endTime && (newTime = baseTime + step) <= endTime)
         {
-            baseTime += step;
+            baseTime = newTime;
+            currentTime = baseTime;
+        }
+        else if(baseTime < endTime)
+        {
+            baseTime = endTime;
             currentTime = baseTime;
         }
         else
