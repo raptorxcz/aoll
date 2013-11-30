@@ -88,8 +88,9 @@ void DSIntegratorBlock::adamBMethod()
     {
         if(ABSteps[i] == INFINITY)
         {
+            double assist = parametr;
             rungeKuttMethod();
-            ABSteps[i] = parametr;
+            ABSteps[i] = parametr - assist;
             currTime = t.value();
             initFlag = 1;
             break;
