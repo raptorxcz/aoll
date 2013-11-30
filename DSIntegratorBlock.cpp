@@ -100,9 +100,15 @@ void DSIntegratorBlock::adamBMethod()
     {
         ABSteps[3] = parametr;
         parametr += (t.getStep() / 24)* (55*ABSteps[3] - 59 * ABSteps[2]  + 37 * ABSteps[1]  - 9 * ABSteps[0]);
-        ABSteps[0] = ABSteps[1];
-        ABSteps[1] = ABSteps[2];
-        ABSteps[2] = ABSteps[3];
+        double assist = parametr;
+        parametr = ABSteps[1];
+        ABSteps[0] = equation->value();
+        parametr = ABSteps[2];
+        ABSteps[1] = equation->value();
+        parametr = ABSteps[3];
+        ABSteps[2] = equation->value();
+
+        parametr = assist;
         currTime = t.value();
     }
 }
