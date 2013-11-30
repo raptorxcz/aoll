@@ -13,3 +13,7 @@ $(PROGRAM) : $(LIBS)
 clean:
 	@rm -f *.d *.o
 	@rm $(PROGRAM)
+
+run:
+	./$(PROGRAM)
+
