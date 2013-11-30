@@ -13,8 +13,11 @@
 #include <cstdio>
 #include <iostream>
 #include <cstdarg>
+#include <fstream>
 
 int count = 1;
+std::string output = "";
+
 
 void setMethod(intType it)
 {
@@ -28,6 +31,10 @@ void Init(double start, double stop)
 
 void Run()
 {
+    std::ofstream ofs;
+    ofs.open(output.c_str(), std::ofstream::out);
+    ofs.close();
+    
     while (t.isCurrentTimeValid())
     {
         runSampler.function();
@@ -44,6 +51,8 @@ void Run()
     
         t.incrementTime();
     }
+    
+    
 }
 
 void setAccuracy(double rel)
@@ -75,13 +84,27 @@ int Print(const char *format, ...)
     
     if(!flagDecrementStep && count == 1)
     {
-        std::cout << string;
+        if(!output.empty())
+        {
+            std::ofstream ofs;
+            ofs.open(output.c_str(), std::ofstream::app);
+            ofs << string;
+            ofs.close();
+        }
+        else
+            std::cout << string;
+        
         t.clearStep();
     }
     else if(!flagDecrementStep)
         count--;
     
     return status;
+}
+
+void setOutput(std::string name)
+{
+    output = name;
 }
 
 

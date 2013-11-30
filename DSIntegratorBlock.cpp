@@ -11,7 +11,6 @@
 intType integratorType = EULER;
 double eAbs = 0.1;
 double eRel = 0.1;
-bool lock;
 bool flagDecrementStep = false;
 bool flagReset = false;
 
@@ -46,7 +45,8 @@ double DSIntegratorBlock::value()
     }
     
     if(t.value() <= currTime || lock)
-        return parametr;
+//        return parametr;
+        return resetParameter;
     else
     {
         run();
