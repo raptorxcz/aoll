@@ -12,7 +12,7 @@ intType integratorType = EULER;
 
 double DSIntegratorBlock::value()
 {
-    if(t.value() == currTime)
+    if(t.value() == currTime) // <=
     {
         return parametr;
     }
@@ -98,17 +98,12 @@ void DSIntegratorBlock::adamBMethod()
 
     if(!initFlag)
     {
-        ABSteps[3] = parametr;
         parametr += (t.getStep() / 24)* (55*ABSteps[3] - 59 * ABSteps[2]  + 37 * ABSteps[1]  - 9 * ABSteps[0]);
-        double assist = parametr;
-        parametr = ABSteps[1];
-        ABSteps[0] = equation->value();
-        parametr = ABSteps[2];
-        ABSteps[1] = equation->value();
-        parametr = ABSteps[3];
-        ABSteps[2] = equation->value();
-
-        parametr = assist;
+        ABSteps[0] = ABSteps[1];
+        ABSteps[1] = ABSteps[2];
+        ABSteps[2] = ABSteps[3];
+        ABSteps[3] = equation->value();
+        
         currTime = t.value();
     }
 }
