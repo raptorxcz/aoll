@@ -40,10 +40,10 @@ void DSIntegratorBlock::run()
         eulerMethod();
         break;
     case RUNGEKUTT:
-        rungeKuttMethoud();
+        rungeKuttMethod();
         break;
     case ADAMB:
-        adamBMethoud();
+        adamBMethod();
         break;
     }
 }
