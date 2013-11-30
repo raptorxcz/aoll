@@ -21,6 +21,17 @@ double DSIntegratorBlock::value()
     }
 }
 
+DSIntegratorBlock::DSIntegratorBlock(DSBlock &block, double value)
+{
+    ABSteps[0] = INFINITY;
+    ABSteps[1] = INFINITY;
+    ABSteps[2] = INFINITY;
+    ABSteps[3] = INFINITY;
+    equation = &block;
+    parametr = value;
+    currTime = t.value();
+};
+
 DSIntegratorBlock::DSIntegratorBlock(DSEquation block, double value)
 {
     ABSteps[0] = INFINITY;
@@ -53,7 +64,7 @@ void DSIntegratorBlock::eulerMethod()
     t.setTime(t.value() - t.getStep());
     currTime = t.value();
     parametr += t.getStep()*equation->value();
-    
+    t.clear();
 }
 
 void DSIntegratorBlock::rungeKuttMethod()
@@ -63,7 +74,7 @@ void DSIntegratorBlock::rungeKuttMethod()
     double assist = parametr;
     double k1 = t.getStep()*equation->value();
 
-    currTime = t.value() - t.getStep() / 2;
+    currTime = t.value() + t.getStep() / 2;
     t.setTime(currTime);
     parametr = assist + k1/2;
     double k2 = t.getStep() *equation->value();

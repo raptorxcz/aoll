@@ -30,6 +30,7 @@ public:
         baseTime = startTime;
     }
     bool incrementTime();
+    void clear();
     bool isCurrentTimeValid();
     virtual double value();
     double getStep();

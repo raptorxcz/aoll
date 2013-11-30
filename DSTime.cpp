@@ -45,6 +45,11 @@ bool DSTime::incrementTime()
     return running;
 }
 
+void DSTime::clear()
+{
+    currentTime = baseTime;
+}
+
 void DSTime::setTime(double time)
 {
     currentTime = time;

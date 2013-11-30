@@ -26,7 +26,8 @@ typedef enum intType
 class DSIntegratorBlock : public DSBlock
 {
 public:
-    DSIntegratorBlock(DSEquation block, double value);
+    DSIntegratorBlock(DSEquation block, double value = 0);
+    DSIntegratorBlock(DSBlock &block, double value = 0);
     virtual double value();
 protected:
     DSBlock *equation;
