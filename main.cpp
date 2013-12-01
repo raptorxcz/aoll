@@ -43,13 +43,13 @@ void Sample() {
     //    fprintf(stdout, "%6.2f %g\n", t.value(), L.x1.value());
 }
 
-DSSampler S(Sample, 0.005);
+DSSampler S(Sample, 0.01);
 
 int main()
 {
     setMethod(RUNGEKUTT);
-    setOutput("output.txt");
-    setAccuracy(1e-3, 0.001);
+    //setOutput("output.txt");
+    setAccuracy(1e-3,0.2);
     Init(0, 30);
     Run();
     return 0;
