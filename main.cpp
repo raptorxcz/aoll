@@ -21,37 +21,37 @@ struct Lorenz {
 
 Lorenz L(10, 24, 2);
 
-struct Mtd {
-    DSIntegratorBlock y;
-    Mtd(): y(t + 2*y, 0){};
-};
+//struct Mtd {
+//    DSIntegratorBlock y;
+//    Mtd(): y(t + 2*y, 0){};
+//};
 
-Mtd m;
+//Mtd m;
 
-struct prepre {
-    DSIntegratorBlock x1, x2;
-    prepre(): x1(x2, 2), x2(x1, 6){};
-};
-
-prepre Z;
+//struct prepre {
+//    DSIntegratorBlock x1, x2, x3;
+//    prepre(): x1(x2, 2), x2(x3, 6), x3(x1, 0){};
+//};
+//
+//prepre Z;
 
 void Sample() {
     //    std::cout  <<  t.value() << " " << L.x1.value() << std::endl;
-//    Print("%6.2f\t %g\t %g\n", t.value(), L.x1.value(), L.x2.value());
-    Print("%6.2f\t %g\t %g\n", t.value(), Z.x1.value(), Z.x2.value());
+    Print("%6.2f\t %g\t %g\n", t.value(), L.x1.value(), L.x2.value());
+//    Print("%6.2f\t %g\t %g\n", t.value(), Z.x1.value(), Z.x2.value());
 //        Print("%6.2f\t %12.6f\n", t.value(), m.y.value());
-//        Print("%12.6f\n", m.y.value());
+//        Print("%18.6f\n", m.y.value());
     //    fprintf(stdout, "%6.2f %g\n", t.value(), L.x1.value());
 }
 
-DSSampler S(Sample, 1);
+DSSampler S(Sample, 0.005);
 
 int main()
 {
     setMethod(ADAMB);
-//    setOutput("output.txt");
-//    setAccuracy(1e-3,0.2);
-    Init(0, 10);
+    setOutput("output.txt");
+    setAccuracy(1e-3,1e-3);
+    Init(0, 30);
     Run();
     return 0;
 }

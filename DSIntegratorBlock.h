@@ -14,6 +14,7 @@
 #include "DSBlock.h"
 #include "DSEquation.h"
 #include "DSTime.h"
+#include <vector>
 
 typedef enum intType
 {
@@ -29,6 +30,8 @@ public:
     DSIntegratorBlock(DSEquation block, double value = 0);
     DSIntegratorBlock(DSBlock &block, double value = 0);
     virtual double value();
+    void run();
+    void reset();
 protected:
     DSBlock *equation;
     double parametr;
@@ -37,13 +40,13 @@ protected:
     double resetParameter;
     double resetCurrentTime;
     double resetLastABStep;
-    bool selfLock;
     
 private:
-    void run();
-    void eulerMethod();
-    void rungeKuttMethod();
-    void adamBMethod();
+    
+    double eulerMethod();
+    double rungeKuttMethod();
+    double adamBMethod();
+    void registerIntegrator();
 };
 
 extern intType integratorType;
@@ -51,5 +54,5 @@ extern double eAbs;
 extern double eRel;
 extern bool flagDecrementStep;
 extern bool flagReset;
-
+extern std::vector<DSIntegratorBlock *> integrators;
 #endif /* defined(__ims__DSIntegratorBlock__) */

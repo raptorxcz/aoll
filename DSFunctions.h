@@ -29,6 +29,14 @@ void Init(double start, double stop)
     t = DSTime(start, stop, runSampler.step);
 }
 
+void runSimulation()
+{
+    for(std::vector<DSIntegratorBlock *>::iterator it = integrators.begin(); it != integrators.end(); ++it)
+    {
+        (*it)->run();
+    }
+}
+
 void Run()
 {
     std::ofstream ofs;
@@ -38,6 +46,13 @@ void Run()
     
     while (t.isCurrentTimeValid())
     {
+        if(flagReset)
+        {
+            for(std::vector<DSIntegratorBlock *>::iterator it = integrators.begin(); it != integrators.end(); ++it)
+                (*it)->reset();
+        }
+        
+        runSimulation();
         runSampler.function();
         flagReset = false;
         
