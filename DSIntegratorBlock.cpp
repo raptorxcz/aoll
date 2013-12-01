@@ -187,7 +187,7 @@ double DSIntegratorBlock::adamBMethod()
         ABSteps[0] = ABSteps[1];
         ABSteps[1] = ABSteps[2];
         ABSteps[2] = ABSteps[3];
-        ABSteps[3] = equation->value();çç
+        ABSteps[3] = equation->value();
         increment = (t.getStep() / 24)* (55*ABSteps[3] - 59 * ABSteps[2]  + 37 * ABSteps[1]  - 9 * ABSteps[0]);
         
         if(!(fabs(increment) <= eAbs || 1-eRel < fabs(parametr)/fabs(parametr+increment)))
