@@ -132,7 +132,9 @@ double DSIntegratorBlock::eulerMethod()
 double DSIntegratorBlock::rungeKuttMethod()
 {
 // !!!!!!!!!!!!!!!!!!!
-    // BLBOST NUTNOST ZAVOLAT runSimulator po zmene kroku !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// BLBOST NUTNOST ZAVOLAT runSimulator po zmene kroku !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//    NEBO SU UPLNE MIMO A FUNGUJE TO NECHAPU
+//    OTAZKA ZDA SE MAJI ZMENIT I OSTATNI INTEGRATORY DO STAVU T+H/2 POKUD NE TAK JE TO OK
 //    !!!!!!!!!!!!!!!!!!!!!!!!z
     
     double assist = parametr;
@@ -185,7 +187,7 @@ double DSIntegratorBlock::adamBMethod()
         ABSteps[0] = ABSteps[1];
         ABSteps[1] = ABSteps[2];
         ABSteps[2] = ABSteps[3];
-        ABSteps[3] = equation->value();
+        ABSteps[3] = equation->value();çç
         increment = (t.getStep() / 24)* (55*ABSteps[3] - 59 * ABSteps[2]  + 37 * ABSteps[1]  - 9 * ABSteps[0]);
         
         if(!(fabs(increment) <= eAbs || 1-eRel < fabs(parametr)/fabs(parametr+increment)))
