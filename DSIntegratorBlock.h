@@ -37,7 +37,7 @@ protected:
     double resetParameter;
     double resetCurrentTime;
     double resetLastABStep;
-    bool lock;
+    bool selfLock;
     
 private:
     void run();

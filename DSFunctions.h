@@ -34,6 +34,7 @@ void Run()
     std::ofstream ofs;
     ofs.open(output.c_str(), std::ofstream::out);
     ofs.close();
+    double newStep;
     
     while (t.isCurrentTimeValid())
     {
@@ -45,7 +46,11 @@ void Run()
             flagDecrementStep = false;
             flagReset = true;
             t.stepBack();
-            t.setStep(t.getStep()/2);
+            
+            if((newStep = t.getStep()/2) < t.getMinStep())
+                newStep = t.getMinStep();
+                
+            t.setStep(newStep);
             count *= 2;
         }
     

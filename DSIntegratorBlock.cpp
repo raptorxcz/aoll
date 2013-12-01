@@ -13,6 +13,8 @@ double eAbs = 0.1;
 double eRel = 0.1;
 bool flagDecrementStep = false;
 bool flagReset = false;
+bool lock;
+DSBlock *locker = nullptr;
 
 double DSIntegratorBlock::value()
 {
@@ -44,9 +46,9 @@ double DSIntegratorBlock::value()
         }
     }
     
-    if(t.value() <= currTime /*&& t.value() >= currTime - t.getStep() */|| lock)
-//        return parametr;
-        return resetParameter;
+    if(t.value() <= currTime || selfLock || (lock && currTime + t.getStep() >= t.value()))
+        return parametr;
+//        return resetParameter;
     else
     {
         run();
@@ -80,6 +82,7 @@ DSIntegratorBlock::DSIntegratorBlock(DSBlock &block, double value)
 DSIntegratorBlock::DSIntegratorBlock(DSEquation block, double value)
 {
     lock = false;
+    selfLock = false;
     ABSteps[0] = INFINITY;
     ABSteps[1] = INFINITY;
     ABSteps[2] = INFINITY;
@@ -94,7 +97,13 @@ DSIntegratorBlock::DSIntegratorBlock(DSEquation block, double value)
 
 void DSIntegratorBlock::run()
 {
-    lock = true;
+    if(!locker)
+    {
+        locker = this;
+        lock = true;
+    }
+    
+    selfLock = true;
     
     switch(integratorType)
     {
@@ -109,7 +118,13 @@ void DSIntegratorBlock::run()
         break;
     }
     
-    lock = false;
+    if(locker == this)
+    {
+        lock = false;
+        locker = nullptr;
+    }
+    
+    selfLock = false;
 }
 
 void DSIntegratorBlock::eulerMethod()
@@ -120,7 +135,7 @@ void DSIntegratorBlock::eulerMethod()
         flagDecrementStep = true;
     
     parametr += increment;
-    currTime = t.value();
+    currTime += t.getStep();
 }
 
 void DSIntegratorBlock::rungeKuttMethod()
@@ -130,33 +145,30 @@ void DSIntegratorBlock::rungeKuttMethod()
 
     currTime += t.getStep()/2;
     t.setTime(currTime);
-    resetParameter = assist + k1 /2;
-//    parametr = assist + k1 /2;
+    parametr = assist + k1 /2;
     double k2 = t.getStep()*equation->value();
 
-    resetParameter = assist + k2 /2;
-//    parametr = assist + k2 /2;
+    parametr = assist + k2 /2;
     double k3 = t.getStep()*equation->value();
 
     currTime += t.getStep()/2;
     t.setTime(currTime);
 
-    resetParameter = assist + k3;
-//    parametr = assist + k3;
+    parametr = assist + k3;
     double k4 = t.getStep()*equation->value();
 
     double increment = (k1 + 2*k2 + 2*k3 + k4) / 6;
-/*
+
     if(!(fabs(increment) <= eAbs || parametr*eRel >= fabs(increment)))
         flagDecrementStep = true;
-*/
+
     parametr = assist;
     parametr += increment;
-   // t.setTime(assist1);
 }
 
 void DSIntegratorBlock::adamBMethod()
 {
+    double increment;
     int initFlag = 0;
 
     for(int i = 0; i < 4;i++)
@@ -164,7 +176,7 @@ void DSIntegratorBlock::adamBMethod()
         if(ABSteps[i] == INFINITY)
         {
             double assist = parametr;
-            eulerMethod();
+            rungeKuttMethod();
             ABSteps[i] = parametr - assist;
             currTime = t.value();
             initFlag = 1;
@@ -179,8 +191,14 @@ void DSIntegratorBlock::adamBMethod()
         ABSteps[1] = ABSteps[2];
         ABSteps[2] = ABSteps[3];
         ABSteps[3] = equation->value();
-        parametr += (t.getStep() / 24)* (55*ABSteps[3] - 59 * ABSteps[2]  + 37 * ABSteps[1]  - 9 * ABSteps[0]);
-        currTime = t.value();
+        increment = (t.getStep() / 24)* (55*ABSteps[3] - 59 * ABSteps[2]  + 37 * ABSteps[1]  - 9 * ABSteps[0]);
+        
+        if(!(fabs(increment) <= eAbs || 1-eRel < fabs(parametr)/fabs(parametr+increment)))
+            flagDecrementStep = true;
+        
+        parametr += increment;
+
+        currTime += t.getStep();
     }
 }
 
