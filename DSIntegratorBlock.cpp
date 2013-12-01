@@ -116,7 +116,7 @@ void DSIntegratorBlock::eulerMethod()
 {
     double increment = t.getStep()*equation->value();
     
-    if(!(increment <= eAbs || parametr*eRel >= increment))
+    if(!(fabs(increment) <= eAbs || parametr*eRel >= fabs(increment)))
         flagDecrementStep = true;
     
     parametr += increment;
@@ -125,27 +125,35 @@ void DSIntegratorBlock::eulerMethod()
 
 void DSIntegratorBlock::rungeKuttMethod()
 {
-    t.setTime(t.value() - t.getStep());
-    currTime = t.value();
+    double increment;
     double assist = parametr;
+    double backupResetPar = resetParameter;
+    currTime = t.value() - t.getStep();
+    t.setTime(currTime);
     double k1 = t.getStep()*equation->value();
 
     currTime = t.value() + t.getStep() / 2;
     t.setTime(currTime);
-    parametr = assist + k1/2;
+    resetParameter = assist + k1/2;
     double k2 = t.getStep() *equation->value();
 
-    parametr = assist + k2/2;
+    resetParameter = assist + k2/2;
     double k3 = t.getStep() *equation->value();
 
     t.setTime(currTime + t.getStep()/2);
     currTime =t.value();
-    parametr = assist + k3;
+    resetParameter = assist + k3;
     double k4 = t.getStep() *equation->value();
 
-    parametr += 1/6 *(k1 + 2*k2 + 2*k3 + k4);
+    increment = (k1 + 2*k2 + 2*k3 + k4) / 6;
+    
+//    if(!(fabs(increment) <= eAbs || 1-eRel < fabs(parametr)/fabs(parametr+increment)))
+//        flagDecrementStep = true;
+    
+    parametr += increment;
+    currTime = t.value();
+    resetParameter = backupResetPar;
 }
-
 
 void DSIntegratorBlock::adamBMethod()
 {
@@ -156,7 +164,7 @@ void DSIntegratorBlock::adamBMethod()
         if(ABSteps[i] == INFINITY)
         {
             double assist = parametr;
-            rungeKuttMethod();
+            eulerMethod();
             ABSteps[i] = parametr - assist;
             currTime = t.value();
             initFlag = 1;
@@ -166,12 +174,13 @@ void DSIntegratorBlock::adamBMethod()
 
     if(!initFlag)
     {
-        parametr += (t.getStep() / 24)* (55*ABSteps[3] - 59 * ABSteps[2]  + 37 * ABSteps[1]  - 9 * ABSteps[0]);
+        
         ABSteps[0] = ABSteps[1];
         ABSteps[1] = ABSteps[2];
         ABSteps[2] = ABSteps[3];
-        currTime = t.value();
         ABSteps[3] = equation->value();
+        parametr += (t.getStep() / 24)* (55*ABSteps[3] - 59 * ABSteps[2]  + 37 * ABSteps[1]  - 9 * ABSteps[0]);
+        currTime = t.value();
     }
 }
 

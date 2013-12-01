@@ -38,19 +38,18 @@ Lorenz L(10, 24, 2);
 void Sample() {
     //    std::cout  <<  t.value() << " " << L.x1.value() << std::endl;
     Print("%6.2f\t %g\t %g\n", t.value(), L.x1.value(), L.x2.value());
-//        Printf("%6.2f\t %12.6f\n", t.value(), m.y.value());
+//        Print("%6.2f\t %12.6f\n", t.value(), m.y.value());
+//        Print("%12.6f\n", m.y.value());
     //    fprintf(stdout, "%6.2f %g\n", t.value(), L.x1.value());
 }
 
-DSSampler S(Sample, 0.05);
+DSSampler S(Sample, 0.005);
 
 int main()
 {
-    setMethod(EULER);
+    setMethod(RUNGEKUTT);
     setOutput("output.txt");
-//    DSParameterBlock op1(5), op2(3), op3(1), op4(4);
-//    DSEquation y = (-op1 + op2 * op3 ) / op4 - op1;
-//    std::cout << y.value() << std::endl;
+    setAccuracy(1e-3, 0.001);
     Init(0, 30);
     Run();
     return 0;
