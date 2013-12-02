@@ -29,6 +29,7 @@ class DSIntegratorBlock : public DSBlock
 public:
     DSIntegratorBlock(DSEquation block, double value = 0);
     DSIntegratorBlock(DSBlock &block, double value = 0);
+    ~DSIntegratorBlock();
     virtual double value();
     void run();
     void reset();

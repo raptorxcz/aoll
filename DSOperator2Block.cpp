@@ -7,3 +7,9 @@
 //
 
 #include "DSOperator2Block.h"
+
+DSOperator2Block::~DSOperator2Block()
+{
+    delete operand1;
+    delete operand2;
+}

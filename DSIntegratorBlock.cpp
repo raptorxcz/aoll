@@ -193,4 +193,8 @@ double DSIntegratorBlock::adamBMethod()
     return parametr;
 }
 
+DSIntegratorBlock::~DSIntegratorBlock()
+{
+    delete equation;
+}
 
