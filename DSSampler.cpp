@@ -8,6 +8,7 @@
 
 #include "DSSampler.h"
 #include <iostream>
+#include <cstdlib>
 
 void rnPrint()
 {
