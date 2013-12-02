@@ -12,6 +12,7 @@
 void rnPrint()
 {
     std::cout << "doplnte sampler" << std::endl;
+    exit(1);
 }
 
 DSSampler::DSSampler(void(*f)(), double aStep)

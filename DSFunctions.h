@@ -42,7 +42,7 @@ void Init(double start, double stop)
     }
     else
     {
-        fprintf(stderr, "chyba, minimalni krok je vetsi jak krok vypisu\n");
+        fprintf(stderr, "chyba, minimalni krok je vetsi nez krok vypisu\n");
         exit(1);
     }
     
