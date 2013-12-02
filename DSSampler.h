@@ -16,7 +16,11 @@ class DSSampler
 public:
     void (*function)();
     double step;
+    double time;
     DSSampler(void(*f)(), double aStep = 0.01);
+    double value();
+    void incrementTime();
+    void setStartTime(double aTime);
 };
 
 extern DSSampler runSampler;

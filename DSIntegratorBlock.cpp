@@ -94,18 +94,16 @@ DSIntegratorBlock::DSIntegratorBlock(DSEquation block, double value)
 
 void DSIntegratorBlock::run()
 {
-    double r = 0;
-    
     switch(integratorType)
     {
     case EULER:
-        r = eulerMethod();
+        eulerMethod();
         break;
     case RUNGEKUTT:
-        r = rungeKuttMethod();
+        rungeKuttMethod();
         break;
     case ADAMB:
-        r = adamBMethod();
+        adamBMethod();
         break;
     }
     
@@ -121,7 +119,7 @@ double DSIntegratorBlock::eulerMethod()
 {
     double increment = t.getStep()*equation->value();
     
-    if(!(fabs(increment) <= eAbs || parametr*eRel >= fabs(increment)))
+    if(!(fabs(increment) <= eAbs || (fabs(parametr*eRel) >= fabs(increment) || t.getStep() <= t.getMinStep())))
         flagDecrementStep = true;
     
     parametr += increment;
@@ -131,12 +129,6 @@ double DSIntegratorBlock::eulerMethod()
 
 double DSIntegratorBlock::rungeKuttMethod()
 {
-// !!!!!!!!!!!!!!!!!!!
-// BLBOST NUTNOST ZAVOLAT runSimulator po zmene kroku !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//    NEBO SU UPLNE MIMO A FUNGUJE TO NECHAPU
-//    OTAZKA ZDA SE MAJI ZMENIT I OSTATNI INTEGRATORY DO STAVU T+H/2 POKUD NE TAK JE TO OK
-//    !!!!!!!!!!!!!!!!!!!!!!!!z
-    
     double assist = parametr;
     double k1 = t.getStep()*equation->value();
 
@@ -156,9 +148,10 @@ double DSIntegratorBlock::rungeKuttMethod()
 
     double increment = (k1 + 2*k2 + 2*k3 + k4) / 6;
 
-    if(!(fabs(increment) <= eAbs || parametr*eRel >= fabs(increment)))
+    if(!(fabs(increment) <= eAbs || fabs(parametr) / fabs(parametr+increment) >= 1-eRel || t.getStep() <= t.getMinStep()))
         flagDecrementStep = true;
 
+    t.setTime(currTime - t.getStep());
     parametr = assist;
     parametr += increment;
     return parametr;
@@ -190,7 +183,7 @@ double DSIntegratorBlock::adamBMethod()
         ABSteps[3] = equation->value();
         increment = (t.getStep() / 24)* (55*ABSteps[3] - 59 * ABSteps[2]  + 37 * ABSteps[1]  - 9 * ABSteps[0]);
         
-        if(!(fabs(increment) <= eAbs || 1-eRel < fabs(parametr)/fabs(parametr+increment)))
+        if(!(fabs(increment) <= eAbs || (fabs(parametr*eRel) >= fabs(increment) || t.getStep() <= t.getMinStep())))
             flagDecrementStep = true;
         
         currTime += t.getStep();
