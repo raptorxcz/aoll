@@ -51,15 +51,6 @@ double DSIntegratorBlock::value()
 
 void DSIntegratorBlock::registerIntegrator()
 {
-//    bool add = true;
-//    
-//    for(std::vector<DSIntegratorBlock *>::iterator it = integrators.begin(); it != integrators.end(); ++it)
-//    {
-//        if((*it)->equation == this->equation && (*it)->parametr == this->parametr)
-//            add = false;
-//    }
-//    
-//    if(add)
         integrators.push_back(this);
 }
 
@@ -196,6 +187,11 @@ double DSIntegratorBlock::adamBMethod()
 
 DSIntegratorBlock::~DSIntegratorBlock()
 {
-    deleteAllocs();
+    for(std::vector<DSBlock *>::iterator it = toDelete.end(); it != toDelete.begin(); ++it)
+    {
+        delete (*it);
+        toDelete.pop_back();
+    }
+
 }
 

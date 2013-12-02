@@ -7,7 +7,6 @@
 //
 
 #include "DS.h"
-#include <cstdio>
 
 //struct Lorenz {
 //    DSIntegratorBlock x1, x2, x3;

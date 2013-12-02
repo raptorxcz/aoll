@@ -8,16 +8,6 @@
 
 #ifndef ims_DSOperations_h
 #define ims_DSOperations_h
-#include <vector>
-#include "DSBlock.h"
-#include "DSPlusBlock.h"
-#include "DSMinusBlock.h"
-#include "DSMultiBlock.h"
-#include "DSDivideBlock.h"
-#include "DSParameterBlock.h"
-#include "DSUnaryMinusBlock.h"
-
-std::vector<DSBlock *> toDelete;
 
 //! Scitani
 DSEquation operator+(DSBlock &v1, DSBlock &v2)
@@ -25,7 +15,7 @@ DSEquation operator+(DSBlock &v1, DSBlock &v2)
     DSBlock *p1 = &v1;
     DSBlock *p2 = &v2;
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
-    toDelete.push_back(p);
+//    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -293,15 +283,6 @@ DSEquation operator-(DSEquation v1)
     DSBlock *p1 = v1.getResult();
     DSUnaryMinusBlock *p = new DSUnaryMinusBlock(p1);
     return DSEquation(p);
-}
-
-void deleteAllocs()
-{
-    for(std::vector<DSBlock *>::iterator it = toDelete.end(); it != toDelete.begin(); ++it)
-    {
-        delete (*it);
-        toDelete.pop_back();
-    }
 }
 
 #endif

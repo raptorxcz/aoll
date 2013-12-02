@@ -8,6 +8,8 @@
 
 #include "DSBlock.h"
 
+std::vector<DSBlock *> toDelete;
+
 double DSBlock::value()
 {
     return 0.0;

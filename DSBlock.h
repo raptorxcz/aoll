@@ -10,6 +10,7 @@
 #define __ims__SDBlock__
 
 #include <iostream>
+#include <vector>
 
 class DSBlock
 {
@@ -17,5 +18,6 @@ class DSBlock
     virtual double value();
 };
 
+extern std::vector<DSBlock *> toDelete;
 
 #endif /* defined(__ims__SDBlock__) */

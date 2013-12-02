@@ -15,7 +15,6 @@
 #include "DSEquation.h"
 #include "DSTime.h"
 #include <vector>
-#include "DSOperations.h"
 
 typedef enum intType
 {
