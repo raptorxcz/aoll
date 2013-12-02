@@ -26,7 +26,27 @@ void setMethod(intType it)
 
 void Init(double start, double stop)
 {
-    t = DSTime(start, stop, runSampler.step);
+    DSTime oldTime = t;
+    t = DSTime(start, stop, fmin(runSampler.step, t.getMaxStep()));
+    t.setMinMaxStep(oldTime.getMinStep(), oldTime.getMaxStep());
+    runSampler.setStartTime(start);
+    
+    double step;
+
+    if(runSampler.step <= t.getMaxStep() && runSampler.step >= t.getMinStep())
+        step = runSampler.step;
+    else if(runSampler.step >= t.getMinStep())
+    {
+        int steps = runSampler.step / t.getMaxStep() + 1;
+        step = runSampler.step / steps;
+    }
+    else
+    {
+        fprintf(stderr, "chyba, minimalni krok je vetsi jak krok vypisu\n");
+        exit(1);
+    }
+    
+    t.setBaseStep(step);
 }
 
 void runSimulation()
@@ -43,6 +63,8 @@ void Run()
     ofs.open(output.c_str(), std::ofstream::out);
     ofs.close();
     double newStep;
+    double tempTime;
+    DSTime tempDSTime = t;
     
     while (t.isCurrentTimeValid())
     {
@@ -53,14 +75,22 @@ void Run()
         }
         
         runSimulation();
-        runSampler.function();
         flagReset = false;
+        
+        if(t.value() >= runSampler.value())
+        {
+            tempTime = t.value();
+            t.setTime(runSampler.value());
+            runSampler.function();
+            t.setTime(tempTime);
+            runSampler.incrementTime();
+        }
         
         if(flagDecrementStep)
         {
             flagDecrementStep = false;
             flagReset = true;
-            t.stepBack();
+            t = tempDSTime;
             
             if((newStep = t.getStep()/2) < t.getMinStep())
                 newStep = t.getMinStep();
@@ -68,7 +98,8 @@ void Run()
             t.setStep(newStep);
             count *= 2;
         }
-    
+        
+        tempDSTime = t;
         t.incrementTime();
     }
     
@@ -102,7 +133,7 @@ int Print(const char *format, ...)
     status = vsprintf (string, format, arg);
     va_end(arg);
     
-    if(!flagDecrementStep && count == 1)
+    if(!flagDecrementStep)
     {
         if(!output.empty())
         {
@@ -116,8 +147,8 @@ int Print(const char *format, ...)
         
         t.clearStep();
     }
-    else if(!flagDecrementStep)
-        count--;
+//    else if(!flagDecrementStep)
+//        count--;
     
     return status;
 }

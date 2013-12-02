@@ -35,6 +35,8 @@ public:
         
         currentTime = startTime;
         baseTime = startTime;
+        minStep = 1e-5;
+        maxStep = 1e-2;
     }
     bool incrementTime();
     void clear();
@@ -44,6 +46,7 @@ public:
     void setTime(double time);
     void stepBack();
     void setStep(double aStep);
+    void setBaseStep(double aStep) {baseStep = aStep;};
     void clearStep();
     double getMinStep(){ return minStep; }
     double getMaxStep(){ return maxStep; }
