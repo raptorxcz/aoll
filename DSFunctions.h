@@ -14,6 +14,7 @@
 #include <iostream>
 #include <cstdarg>
 #include <fstream>
+#include <cstdlib>
 
 int count = 1;
 std::string output = "";
