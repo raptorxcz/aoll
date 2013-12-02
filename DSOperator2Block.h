@@ -18,7 +18,6 @@ class DSOperator2Block : public DSBlock
     
     public:
     explicit DSOperator2Block(DSBlock *opr1, DSBlock *opr2): operand1(opr1), operand2(opr2){};
-    ~DSOperator2Block();
     
 };
 

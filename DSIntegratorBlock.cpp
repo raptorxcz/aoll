@@ -8,6 +8,7 @@
 
 #include "DSIntegratorBlock.h"
 
+
 intType integratorType = EULER;
 double eAbs = 0.1;
 double eRel = 0.1;
@@ -50,15 +51,15 @@ double DSIntegratorBlock::value()
 
 void DSIntegratorBlock::registerIntegrator()
 {
-    bool add = true;
-    
-    for(std::vector<DSIntegratorBlock *>::iterator it = integrators.begin(); it != integrators.end(); ++it)
-    {
-        if((*it)->equation == this->equation && (*it)->parametr == this->parametr)
-            add = false;
-    }
-    
-    if(add)
+//    bool add = true;
+//    
+//    for(std::vector<DSIntegratorBlock *>::iterator it = integrators.begin(); it != integrators.end(); ++it)
+//    {
+//        if((*it)->equation == this->equation && (*it)->parametr == this->parametr)
+//            add = false;
+//    }
+//    
+//    if(add)
         integrators.push_back(this);
 }
 
@@ -195,6 +196,6 @@ double DSIntegratorBlock::adamBMethod()
 
 DSIntegratorBlock::~DSIntegratorBlock()
 {
-    delete equation;
+    deleteAllocs();
 }
 
