@@ -101,6 +101,7 @@ DSEquation operator-(DSEquation v1, DSBlock &v2)
     DSBlock *p1 = v1.getResult();
     DSBlock *p2 = &v2;
     DSMinusBlock *p = new DSMinusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -245,6 +246,7 @@ DSEquation operator/(DSBlock &v1, DSBlock &v2)
     DSBlock *p1 = &v1;
     DSBlock *p2 = &v2;
     DSDivideBlock *p = new DSDivideBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -253,6 +255,7 @@ DSEquation operator/(DSBlock &v1, DSEquation v2)
     DSBlock *p1 = &v1;
     DSBlock *p2 = v2.getResult();
     DSDivideBlock *p = new DSDivideBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -261,6 +264,7 @@ DSEquation operator/(DSEquation v1, DSBlock &v2)
     DSBlock *p1 = v1.getResult();
     DSBlock *p2 = &v2;
     DSDivideBlock *p = new DSDivideBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
