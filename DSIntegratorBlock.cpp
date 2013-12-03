@@ -187,7 +187,7 @@ double DSIntegratorBlock::adamBMethod()
 
 DSIntegratorBlock::~DSIntegratorBlock()
 {
-    for (unsigned long i = toDelete.size(); i > 0; i--)
+    for (int i = (int)toDelete.size() - 1; i >= 0; i--)
     {
         delete (toDelete[i]);
         toDelete.pop_back();
