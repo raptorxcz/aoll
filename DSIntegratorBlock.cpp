@@ -187,7 +187,7 @@ double DSIntegratorBlock::adamBMethod()
 
 DSIntegratorBlock::~DSIntegratorBlock()
 {
-    for(std::vector<DSBlock *>::iterator it = toDelete.end(); it != toDelete.begin(); ++it)
+    for(std::vector<DSBlock *>::iterator it = toDelete.end(); it != toDelete.begin(); --it)
     {
         delete (*it);
         toDelete.pop_back();
