@@ -15,7 +15,7 @@ DSEquation operator+(DSBlock &v1, DSBlock &v2)
     DSBlock *p1 = &v1;
     DSBlock *p2 = &v2;
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
-//    toDelete.push_back(p);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -24,6 +24,7 @@ DSEquation operator+(DSEquation v1, DSBlock &v2)
     DSBlock *p1 = v1.getResult();
     DSBlock *p2 = &v2;
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -32,6 +33,7 @@ DSEquation operator+(DSBlock &v1, DSEquation v2)
     DSBlock *p1 = &v1;
     DSBlock *p2 = v2.getResult();
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -40,6 +42,7 @@ DSEquation operator+(DSEquation v1, DSEquation v2)
     DSBlock *p1 = v1.getResult();
     DSBlock *p2 = v2.getResult();
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -48,6 +51,7 @@ DSEquation operator+(double v1, DSBlock &v2)
     DSBlock *p1 = new DSParameterBlock(v1);
     DSBlock *p2 = &v2;
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -56,6 +60,7 @@ DSEquation operator+(DSEquation v1, double v2)
     DSBlock *p1 = v1.getResult();
     DSBlock *p2 = new DSParameterBlock(v2);
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -64,6 +69,7 @@ DSEquation operator+(double v1, DSEquation v2)
     DSBlock *p1 = new DSParameterBlock(v1);
     DSBlock *p2 = v2.getResult();
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -72,6 +78,7 @@ DSEquation operator+(DSBlock &v1, double v2)
     DSBlock *p1 = &v1;
     DSBlock *p2 = new DSParameterBlock(v2);
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -81,6 +88,7 @@ DSEquation operator-(DSBlock &v1, DSBlock &v2)
     DSBlock *p1 = &v1;
     DSBlock *p2 = &v2;
     DSMinusBlock *p = new DSMinusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -97,6 +105,7 @@ DSEquation operator-(DSBlock &v1, DSEquation v2)
     DSBlock *p1 = &v1;
     DSBlock *p2 = v2.getResult();
     DSMinusBlock *p = new DSMinusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -105,6 +114,7 @@ DSEquation operator-(DSEquation v1, DSEquation v2)
     DSBlock *p1 = v1.getResult();
     DSBlock *p2 = v2.getResult();
     DSMinusBlock *p = new DSMinusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -113,6 +123,7 @@ DSEquation operator-(double v1, DSBlock &v2)
     DSBlock *p1 = new DSParameterBlock(v1);
     DSBlock *p2 = &v2;
     DSMinusBlock *p = new DSMinusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -121,6 +132,7 @@ DSEquation operator-(DSEquation v1, double v2)
     DSBlock *p1 = v1.getResult();
     DSBlock *p2 = new DSParameterBlock(v2);
     DSMinusBlock *p = new DSMinusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -129,6 +141,7 @@ DSEquation operator-(double v1, DSEquation v2)
     DSBlock *p1 = new DSParameterBlock(v1);
     DSBlock *p2 = v2.getResult();
     DSMinusBlock *p = new DSMinusBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -146,6 +159,7 @@ DSEquation operator*(DSBlock &v1, DSBlock &v2)
     DSBlock *p1 = &v1;
     DSBlock *p2 = &v2;
     DSMultiBlock *p = new DSMultiBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -154,6 +168,7 @@ DSEquation operator*(DSBlock &v1, DSEquation v2)
     DSBlock *p1 = &v1;
     DSBlock *p2 = v2.getResult();
     DSMultiBlock *p = new DSMultiBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -162,6 +177,7 @@ DSEquation operator*(DSEquation v1, DSBlock &v2)
     DSBlock *p1 = v1.getResult();
     DSBlock *p2 = &v2;
     DSMultiBlock *p = new DSMultiBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -170,6 +186,7 @@ DSEquation operator*(DSEquation v1, DSEquation v2)
     DSBlock *p1 = v1.getResult();
     DSBlock *p2 = v2.getResult();
     DSMultiBlock *p = new DSMultiBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -178,6 +195,7 @@ DSEquation operator*(double v1, DSBlock &v2)
     DSBlock *p1 = new DSParameterBlock(v1);
     DSBlock *p2 = &v2;
     DSMultiBlock *p = new DSMultiBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -186,6 +204,7 @@ DSEquation operator*(DSEquation v1, double v2)
     DSBlock *p1 = v1.getResult();
     DSBlock *p2 = new DSParameterBlock(v2);
     DSMultiBlock *p = new DSMultiBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -194,6 +213,7 @@ DSEquation operator*(double v1, DSEquation v2)
     DSBlock *p1 = new DSParameterBlock(v1);
     DSBlock *p2 = v2.getResult();
     DSMultiBlock *p = new DSMultiBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
@@ -202,6 +222,7 @@ DSEquation operator*(DSBlock &v1, double v2)
     DSBlock *p1 = &v1;
     DSBlock *p2 = new DSParameterBlock(v2);
     DSMultiBlock *p = new DSMultiBlock(p1, p2);
+    toDelete.push_back(p);
     return DSEquation(p);
 }
 
