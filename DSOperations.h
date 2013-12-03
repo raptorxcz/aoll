@@ -52,6 +52,7 @@ DSEquation operator+(double v1, DSBlock &v2)
     DSBlock *p2 = &v2;
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
     toDelete.push_back(p);
+    toDelete.push_back(p1);
     return DSEquation(p);
 }
 
@@ -61,6 +62,7 @@ DSEquation operator+(DSEquation v1, double v2)
     DSBlock *p2 = new DSParameterBlock(v2);
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
     toDelete.push_back(p);
+    toDelete.push_back(p2);
     return DSEquation(p);
 }
 
@@ -70,6 +72,7 @@ DSEquation operator+(double v1, DSEquation v2)
     DSBlock *p2 = v2.getResult();
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
     toDelete.push_back(p);
+    toDelete.push_back(p1);
     return DSEquation(p);
 }
 
@@ -79,6 +82,7 @@ DSEquation operator+(DSBlock &v1, double v2)
     DSBlock *p2 = new DSParameterBlock(v2);
     DSPlusBlock *p = new DSPlusBlock(p1, p2);
     toDelete.push_back(p);
+    toDelete.push_back(p2);
     return DSEquation(p);
 }
 
