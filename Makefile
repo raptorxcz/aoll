@@ -1,20 +1,28 @@
 CC = g++
 FLAGS =
-PROGRAM = main
-LIBS = DS*.cpp main.cpp
+PROGRAM1 = lorenz
+PROGRAM2 = shilnikov
+LIBS = DS*.cpp
 LIBS1 = ../simlib/src/*.cc main.cpp
 
 all: build
 
-build: $(PROGRAM)
+build: $(PROGRAM1)
 
-$(PROGRAM) : $(LIBS)
-	$(CC) $(FLAGS) $(LIBS) -o $@
+$(PROGRAM1) : $(LIBS) main.cpp
+	$(CC) $(FLAGS) $(LIBS) main.cpp -o $@
+
+build: $(PROGRAM2)
+$(PROGRAM2) : $(LIBS) main1.cpp
+	$(CC) $(FLAGS) $(LIBS) main1.cpp -o $@
+
 
 clean:
 	@rm -f *.d *.o
-	@rm $(PROGRAM)
+	@rm $(PROGRAM1)
+	@rm $(PROGRAM2) 
 
 run:
-	./$(PROGRAM)
+	./$(PROGRAM1)
+	./$(PROGRAM2)
 
