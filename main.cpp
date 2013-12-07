@@ -1,3 +1,9 @@
+//
+//  main.cpp
+//  ims
+//
+//  Created by xkaisl00, xmatej42.
+//
 #include "DS.h"
 
 struct Lorenz {
