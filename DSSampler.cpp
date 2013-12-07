@@ -2,14 +2,14 @@
 //  DSSampler.cpp
 //  ims
 //
-//  Created by Kryštof Matěj on 29.11.13.
-//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//  Created by xkaisl00, xmatej42.
 //
 
 #include "DSSampler.h"
 #include <iostream>
 #include <cstdlib>
 
+// Vychozi funkce tisku.
 void rnPrint()
 {
     std::cout << "doplnte sampler" << std::endl;

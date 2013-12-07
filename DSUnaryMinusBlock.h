@@ -2,8 +2,7 @@
 //  DSUnaryMinusBlock.h
 //  ims
 //
-//  Created by Kryštof Matěj on 28.11.13.
-//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//  Created by xkaisl00, xmatej42.
 //
 
 #ifndef __ims__DSUnaryMinusBlock__
@@ -12,6 +11,7 @@
 #include <iostream>
 #include "DSOperator1Block.h"
 
+// Trida unarniho minus. Jako hodnotu vraci negovanou hodnotu vyrazu.
 class DSUnaryMinusBlock: public DSOperator1Block
 {
     

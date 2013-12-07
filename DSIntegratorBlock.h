@@ -2,8 +2,7 @@
 //  DSIntegratorBlock.h
 //  ims
 //
-//  Created by Kryštof Matěj on 28.11.13.
-//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//  Created by xkaisl00, xmatej42.
 //
 
 #ifndef __ims__DSIntegratorBlock__
@@ -16,6 +15,7 @@
 #include "DSTime.h"
 #include <vector>
 
+// Vycet typu integracnich metod.
 typedef enum intType
 {
     EULER,
@@ -23,15 +23,21 @@ typedef enum intType
     ADAMB
 }IntegratorType;
 
-
+// Objekt integratoru
 class DSIntegratorBlock : public DSBlock
 {
 public:
     DSIntegratorBlock(DSEquation block, double value = 0);
     DSIntegratorBlock(DSBlock &block, double value = 0);
     ~DSIntegratorBlock();
+    
+    // Vraci posledni vypoctenou hodnotu.
     virtual double value();
+    
+    // Vyhodnoti integrator
     void run();
+    
+    // Vraci integrator do predchoziho stavu.
     void reset();
 protected:
     DSBlock *equation;
@@ -43,9 +49,11 @@ protected:
     double resetLastABStep;
     
 private:
-    
+    // Vypocet eulera.
     double eulerMethod();
+    // Vypocet RungeKutta.
     double rungeKuttMethod();
+    // Vypocet AdamB.
     double adamBMethod();
     void registerIntegrator();
 };

@@ -2,8 +2,7 @@
 //  DSDivideBlock.h
 //  ims
 //
-//  Created by Kryštof Matěj on 27.11.13.
-//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//  Created by xkaisl00, xmatej42.
 //
 
 #ifndef __ims__DSDivideBlock__
@@ -12,6 +11,7 @@
 #include <iostream>
 #include "DSOperator2Block.h"
 
+// Trida deleno. Jako hodnotu podil soucet hodnot vyrazu.
 class DSDivideBlock : public DSOperator2Block
 {
 public:

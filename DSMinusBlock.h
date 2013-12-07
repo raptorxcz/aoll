@@ -2,8 +2,7 @@
 //  DSMinusBlock.h
 //  ims
 //
-//  Created by Kryštof Matěj on 27.11.13.
-//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//  Created by xkaisl00, xmatej42.
 //
 
 #ifndef __ims__DSMinusBlock__
@@ -12,6 +11,7 @@
 #include <iostream>
 #include "DSOperator2Block.h"
 
+// Trida minus. Jako hodnotu vraci rozdil hodnot vyrazu.
 class DSMinusBlock : public DSOperator2Block
 {
 public:

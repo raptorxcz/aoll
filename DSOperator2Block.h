@@ -2,8 +2,7 @@
 //  DSOperator2Block.h
 //  ims
 //
-//  Created by Kryštof Matěj on 27.11.13.
-//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//  Created by xkaisl00, xmatej42.
 //
 
 #ifndef __ims__DSOperator2Block__
@@ -11,6 +10,7 @@
 
 #include "DSBlock.h"
 
+// Abstraktni trida pro bloky ktery maji dva parametr.
 class DSOperator2Block : public DSBlock
 {
     protected:

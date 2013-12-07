@@ -2,8 +2,7 @@
 //  DSOperator1Block.h
 //  ims
 //
-//  Created by Kryštof Matěj on 28.11.13.
-//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//  Created by xkaisl00, xmatej42.
 //
 
 #ifndef __ims__DSOperator1Block__
@@ -12,6 +11,7 @@
 #include <iostream>
 #include "DSBlock.h"
 
+// Abstraktni trida pro bloky ktery maji jeden parametr.
 class DSOperator1Block: public DSBlock
 {
     protected:

@@ -2,12 +2,13 @@
 //  DS.h
 //  ims
 //
-//  Created by Kryštof Matěj on 28.11.13.
-//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//  Created by xkaisl00, xmatej42.
 //
 
 #ifndef ims_DS_h
 #define ims_DS_h
+
+// vytvoreni spojiteho simulatoru.
 
 #include "DSSampler.h"
 #include "DSEquation.h"

@@ -2,8 +2,7 @@
 //  DSParameterBlock.h
 //  ims
 //
-//  Created by Kryštof Matěj on 28.11.13.
-//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//  Created by xkaisl00, xmatej42.
 //
 
 #ifndef __ims__DSParameterBlock__
@@ -12,6 +11,7 @@
 #include <iostream>
 #include "DSBlock.h"
 
+// Blok ktery vraci jako hodnotu velikost jeho parametru.
 class DSParameterBlock : public DSBlock
 {
     protected:

@@ -2,8 +2,7 @@
 //  SDBlock.h
 //  ims
 //
-//  Created by Kryštof Matěj on 27.11.13.
-//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//  Created by xkaisl00, xmatej42.
 //
 
 #ifndef __ims__SDBlock__
@@ -12,9 +11,11 @@
 #include <iostream>
 #include <vector>
 
+// Abstraktni trida pro bloky.
 class DSBlock
 {
     public:
+    // Funkce ktera vraci hodnotu vyrazu.
     virtual double value();
 };
 

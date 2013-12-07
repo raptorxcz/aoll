@@ -2,8 +2,7 @@
 //  DSSampler.h
 //  ims
 //
-//  Created by Kryštof Matěj on 29.11.13.
-//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//  Created by xkaisl00, xmatej42.
 //
 
 #ifndef __ims__DSSampler__
@@ -11,6 +10,7 @@
 
 #include <iostream>
 
+// Trida ktera vzorkuje vysledek a vypisuje je na vystup.
 class DSSampler
 {
 public:
@@ -19,7 +19,10 @@ public:
     double time;
     DSSampler(void(*f)(), double aStep = 0.01);
     double value();
+    // Zvisi cas Sampleru.
     void incrementTime();
+    
+    // Nastavi pocatecni cas.
     void setStartTime(double aTime);
 };
 

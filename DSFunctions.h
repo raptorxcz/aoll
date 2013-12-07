@@ -2,8 +2,7 @@
 //  DSFunctions.h
 //  ims
 //
-//  Created by Kryštof Matěj on 28.11.13.
-//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//  Created by xkaisl00, xmatej42.
 //
 
 #ifndef ims_DSFunctions_h
@@ -16,15 +15,15 @@
 #include <fstream>
 #include <cstdlib>
 
-int count = 1;
 std::string output = "";
 
-
+// Nastaveni typu integratoru.
 void setMethod(intType it)
 {
     integratorType = it;
 }
 
+// Inicializace casu vypoctu od do.
 void Init(double start, double stop)
 {
     DSTime oldTime = t;
@@ -50,6 +49,7 @@ void Init(double start, double stop)
     t.setBaseStep(step);
 }
 
+// Provedeni jednoho kroku simulace.
 void runSimulation()
 {
     for(std::vector<DSIntegratorBlock *>::iterator it = integrators.begin(); it != integrators.end(); ++it)
@@ -58,6 +58,7 @@ void runSimulation()
     }
 }
 
+// Provedeni simulace.
 void Run()
 {
     std::ofstream ofs;
@@ -97,7 +98,6 @@ void Run()
                 newStep = t.getMinStep();
                 
             t.setStep(newStep);
-            count *= 2;
         }
         
         tempDSTime = t;
@@ -107,23 +107,27 @@ void Run()
     
 }
 
+// Nastaveni presnosti pouze relativni hodnotou.
 void setAccuracy(double rel)
 {
     eRel = rel;
     eAbs = 0;
 }
 
+// Nastaveni presnosti relativne i absolutne.
 void setAccuracy(double abs, double rel)
 {
     eAbs = abs;
     eRel = rel;
 }
 
+// Nastaveni minimalniho a maximalniho kroku vypoctu.
 void setMinMaxStep(double min, double max)
 {
     t.setMinMaxStep(min, max);
 }
 
+// Vytisknuti hodnot z bloku.
 int Print(const char *format, ...)
 {
     va_list arg;
@@ -148,12 +152,11 @@ int Print(const char *format, ...)
         
         t.clearStep();
     }
-//    else if(!flagDecrementStep)
-//        count--;
     
     return status;
 }
 
+// Nastaveni vystupu do souboru
 void setOutput(std::string name)
 {
     output = name;

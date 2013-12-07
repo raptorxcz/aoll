@@ -2,12 +2,13 @@
 //  DSOperations.h
 //  ims
 //
-//  Created by Kryštof Matěj on 28.11.13.
-//  Copyright (c) 2013 Kryštof Matěj. All rights reserved.
+//  Created by xkaisl00, xmatej42.
 //
 
 #ifndef ims_DSOperations_h
 #define ims_DSOperations_h
+
+// Soubor s pretizenymi operacemi mezi DSBlock, double a DSEquation
 
 //! Scitani
 DSEquation operator+(DSBlock &v1, DSBlock &v2)
