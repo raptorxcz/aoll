@@ -19,8 +19,6 @@
 
     #include "DSOperator1Block.h"
         #include "DSUnaryMinusBlock.h"
-        #include "DSDelayBlock.h"
-        #include "DSExpressionBlock.h"
 
     #include "DSOperator2Block.h"
         #include "DSPlusBlock.h"
