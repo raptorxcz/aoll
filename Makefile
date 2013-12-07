@@ -20,7 +20,7 @@ $(PROGRAM2) : $(LIBS) main1.cpp
 clean:
 	@rm -f *.d *.o
 	@rm $(PROGRAM1)
-	@rm $(PROGRAM1) 
+	@rm $(PROGRAM2) 
 
 run:
 	./$(PROGRAM1)
