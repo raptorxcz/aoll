@@ -6,6 +6,7 @@
 //
 #include "DS.h"
 
+// vypocet Lorenze
 struct Lorenz {
     DSIntegratorBlock x1, x2, x3;
     DSParameterBlock p1, p2, p3, p4;

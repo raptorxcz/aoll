@@ -1,5 +1,12 @@
+//
+//  main1.cpp
+//  ims
+//
+//  Created by xkaisl00, xmatej42.
+//
 #include "DS.h"
 
+// vypocet Silnikova
 class Silnikov {
 public:
     DSParameterBlock a,b,c,d;
