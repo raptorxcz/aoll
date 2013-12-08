@@ -27,10 +27,16 @@ void setMethod(intType it)
 void init(double start, double stop)
 {
     DSTime oldTime = t;
+
+    if(runSampler == NULL)
+    {
+        std::cerr << "Doplnte Sampler" << std::endl;
+        exit(1);
+    }
     t = DSTime(start, stop, fmin(runSampler->step, t.getMaxStep()));
     t.setMinMaxStep(oldTime.getMinStep(), oldTime.getMaxStep());
     runSampler->setStartTime(start);
-    
+
     double step;
 
     if(runSampler->step <= t.getMaxStep() && runSampler->step >= t.getMinStep())
@@ -45,7 +51,7 @@ void init(double start, double stop)
         fprintf(stderr, "chyba, minimalni krok je vetsi nez krok vypisu\n");
         exit(1);
     }
-    
+
     t.setBaseStep(step);
 }
 
@@ -61,13 +67,18 @@ void runSimulation()
 // Provedeni simulace.
 void run()
 {
+    if(runSampler == NULL)
+    {
+        std::cerr << "Doplnte Sampler" << std::endl;
+        exit(1);
+    }
     std::ofstream ofs;
     ofs.open(output.c_str(), std::ofstream::out);
     ofs.close();
     double newStep;
     double tempTime;
     DSTime tempDSTime = t;
-    
+
     while (t.isCurrentTimeValid())
     {
         if(flagReset)
@@ -75,10 +86,10 @@ void run()
             for(std::vector<DSIntegratorBlock *>::iterator it = integrators.begin(); it != integrators.end(); ++it)
                 (*it)->reset();
         }
-        
+
         runSimulation();
         flagReset = false;
-        
+
         if(t.value() >= runSampler->value())
         {
             tempTime = t.value();
@@ -87,24 +98,24 @@ void run()
             t.setTime(tempTime);
             runSampler->incrementTime();
         }
-        
+
         if(flagDecrementStep)
         {
             flagDecrementStep = false;
             flagReset = true;
             t = tempDSTime;
-            
+
             if((newStep = t.getStep()/2) < t.getMinStep())
                 newStep = t.getMinStep();
-                
+
             t.setStep(newStep);
         }
-        
+
         tempDSTime = t;
         t.incrementTime();
     }
-    
-    
+
+
 }
 
 // Nastaveni presnosti pouze relativni hodnotou.
@@ -133,11 +144,11 @@ int print(const char *format, ...)
     va_list arg;
     int status;
     char string[256];
-    
+
     va_start(arg, format);
     status = vsprintf (string, format, arg);
     va_end(arg);
-    
+
     if(!flagDecrementStep)
     {
         if(!output.empty())
@@ -149,10 +160,10 @@ int print(const char *format, ...)
         }
         else
             std::cout << string;
-        
+
         t.clearStep();
     }
-    
+
     return status;
 }
 

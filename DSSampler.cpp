@@ -21,12 +21,13 @@ DSSampler::DSSampler(void(*f)(), double aStep)
     step = aStep;
     time = 0;
     function = f;
-    delete runSampler;
     runSampler = this;
+//    delete assist;
 }
 
 DSSampler::~DSSampler()
 {
+    //delete runSampler;
 }
 
 double DSSampler::value()
@@ -44,4 +45,4 @@ void DSSampler::setStartTime(double aTime)
     time = aTime;
 }
 
-DSSampler *runSampler = new DSSampler(rnPrint, 0.01);
+DSSampler *runSampler = NULL;

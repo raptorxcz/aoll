@@ -23,7 +23,7 @@ void Sample() {
     print("%6.2f\t %g\t %g\n", t.value(), L.x1.value(), L.x2.value());
 }
 
-DSSampler S(Sample, 0.01);
+DSSampler S(&Sample, 0.01);
 
 int main()
 {
