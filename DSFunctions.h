@@ -24,7 +24,7 @@ void setMethod(intType it)
 }
 
 // Inicializace casu vypoctu od do.
-void Init(double start, double stop)
+void init(double start, double stop)
 {
     DSTime oldTime = t;
     t = DSTime(start, stop, fmin(runSampler.step, t.getMaxStep()));
@@ -59,7 +59,7 @@ void runSimulation()
 }
 
 // Provedeni simulace.
-void Run()
+void run()
 {
     std::ofstream ofs;
     ofs.open(output.c_str(), std::ofstream::out);
@@ -128,7 +128,7 @@ void setMinMaxStep(double min, double max)
 }
 
 // Vytisknuti hodnot z bloku.
-int Print(const char *format, ...)
+int print(const char *format, ...)
 {
     va_list arg;
     int status;

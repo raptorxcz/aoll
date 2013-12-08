@@ -20,7 +20,7 @@ struct Lorenz {
 Lorenz L(10, 24, 2);
 
 void Sample() {
-    Print("%6.2f\t %g\t %g\n", t.value(), L.x1.value(), L.x2.value());
+    print("%6.2f\t %g\t %g\n", t.value(), L.x1.value(), L.x2.value());
 }
 
 DSSampler S(Sample, 0.01);
@@ -31,8 +31,8 @@ int main()
     setMethod(ADAMB);
     setOutput("pokus.dat");
     setAccuracy(1e-8,1e-3);
-    Init(0, 250);
-    Run();
+    init(0, 250);
+    run();
     return 0;
 }
 

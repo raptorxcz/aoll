@@ -22,7 +22,7 @@ Silnikov e(0.4, 0.65, 0, 1);
 
 void Sample() {
 
-    Print("%6.2f\t %g\t %g\n", t.value(), e.x1.value(), e.x2.value());
+    print("%6.2f\t %g\t %g\n", t.value(), e.x1.value(), e.x2.value());
 }
 
 DSSampler S(Sample, 0.01);
@@ -33,8 +33,8 @@ int main()
     setMethod(ADAMB);
     setOutput("Shilnikov_adamb.dat");
     setAccuracy(1e-8,1e-3);
-    Init(0, 250);
-    Run();
+    init(0, 250);
+    run();
     return 0;
 }
 
