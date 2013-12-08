@@ -15,7 +15,6 @@
 #include "DSBlock.h"
     #include "DSParameterBlock.h"
     #include "DSIntegratorBlock.h"
-    #include "DSConstantBlock.h"
     #include "DSTime.h"
 
     #include "DSOperator1Block.h"
