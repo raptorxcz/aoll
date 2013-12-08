@@ -27,18 +27,18 @@ void setMethod(intType it)
 void init(double start, double stop)
 {
     DSTime oldTime = t;
-    t = DSTime(start, stop, fmin(runSampler.step, t.getMaxStep()));
+    t = DSTime(start, stop, fmin(runSampler->step, t.getMaxStep()));
     t.setMinMaxStep(oldTime.getMinStep(), oldTime.getMaxStep());
-    runSampler.setStartTime(start);
+    runSampler->setStartTime(start);
     
     double step;
 
-    if(runSampler.step <= t.getMaxStep() && runSampler.step >= t.getMinStep())
-        step = runSampler.step;
-    else if(runSampler.step >= t.getMinStep())
+    if(runSampler->step <= t.getMaxStep() && runSampler->step >= t.getMinStep())
+        step = runSampler->step;
+    else if(runSampler->step >= t.getMinStep())
     {
-        int steps = runSampler.step / t.getMaxStep() + 1;
-        step = runSampler.step / steps;
+        int steps = runSampler->step / t.getMaxStep() + 1;
+        step = runSampler->step / steps;
     }
     else
     {
@@ -79,13 +79,13 @@ void run()
         runSimulation();
         flagReset = false;
         
-        if(t.value() >= runSampler.value())
+        if(t.value() >= runSampler->value())
         {
             tempTime = t.value();
-            t.setTime(runSampler.value());
-            runSampler.function();
+            t.setTime(runSampler->value());
+            runSampler->function();
             t.setTime(tempTime);
-            runSampler.incrementTime();
+            runSampler->incrementTime();
         }
         
         if(flagDecrementStep)
