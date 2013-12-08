@@ -21,8 +21,13 @@ DSSampler::DSSampler(void(*f)(), double aStep)
     step = aStep;
     time = 0;
     function = f;
-    runSampler = *this;
-};
+    delete runSampler;
+    runSampler = this;
+}
+
+DSSampler::~DSSampler()
+{
+}
 
 double DSSampler::value()
 {
@@ -39,4 +44,4 @@ void DSSampler::setStartTime(double aTime)
     time = aTime;
 }
 
-DSSampler runSampler(rnPrint, 0.01);
+DSSampler *runSampler = new DSSampler(rnPrint, 0.01);

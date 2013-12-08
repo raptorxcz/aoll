@@ -18,6 +18,7 @@ public:
     double step;
     double time;
     DSSampler(void(*f)(), double aStep = 0.01);
+    ~DSSampler();
     double value();
     // Zvisi cas Sampleru.
     void incrementTime();
@@ -26,6 +27,6 @@ public:
     void setStartTime(double aTime);
 };
 
-extern DSSampler runSampler;
+extern DSSampler *runSampler;
     
 #endif /* defined(__ims__DSSampler__) */
